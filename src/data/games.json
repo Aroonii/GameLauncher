@@ -1,0 +1,65 @@
+[
+  {
+    "id": "1",
+    "title": "Tetris",
+    "image": "https://via.placeholder.com/200x200/8e44ad/ffffff?text=%F0%9F%A7%A9%E2%80%8BTetris",
+    "url": "https://htmltetris.cz/",
+    "preferredOrientation": "portrait",
+    "category": "Puzzle",
+    "description": "Classic block-stacking puzzle game"
+  },
+  {
+    "id": "2",
+    "title": "HexGL Racing",
+    "image": "https://via.placeholder.com/200x200/e74c3c/ffffff?text=%F0%9F%8F%8E%E2%80%8BRacing",
+    "url": "https://hexgl.bkcore.com/",
+    "preferredOrientation": "landscape",
+    "category": "Racing",
+    "description": "Futuristic high-speed racing"
+  },
+  {
+    "id": "3",
+    "title": "Flappy Bird",
+    "image": "https://via.placeholder.com/200x200/f39c12/ffffff?text=%F0%9F%90%A6%E2%80%8BFlappy",
+    "url": "https://flappybird.io/",
+    "preferredOrientation": "landscape",
+    "category": "Arcade",
+    "description": "Tap to fly through pipes"
+  },
+  {
+    "id": "4",
+    "title": "Tomb Runner",
+    "image": "https://via.placeholder.com/200x200/27ae60/ffffff?text=%F0%9F%8F%83%E2%80%8BRunner",
+    "url": "https://plays.org/tomb-runner/",
+    "preferredOrientation": "landscape",
+    "category": "Adventure",
+    "description": "Endless temple running adventure"
+  },
+  {
+    "id": "5",
+    "title": "2048",
+    "image": "https://via.placeholder.com/200x200/3498db/ffffff?text=%F0%9F%94%A2%E2%80%8B2048",
+    "url": "https://play2048.co/",
+    "preferredOrientation": "portrait",
+    "category": "Puzzle",
+    "description": "Combine tiles to reach 2048"
+  },
+  {
+    "id": "6",
+    "title": "Pac-Man",
+    "image": "https://via.placeholder.com/200x200/f1c40f/000000?text=%F0%9F%91%BE%E2%80%8BPac-Man",
+    "url": "https://pacman.platzh1rsch.ch/",
+    "preferredOrientation": "landscape",
+    "category": "Arcade",
+    "description": "Classic arcade maze game"
+  },
+  {
+    "id": "7",
+    "title": "Broken Game",
+    "image": "https://via.placeholder.com/200x200/95a5a6/ffffff?text=%E2%9A%A0%EF%B8%8F%E2%80%8BTest",
+    "url": "https://example.com/nonexistent-game",
+    "preferredOrientation": "landscape",
+    "category": "Test",
+    "description": "Error testing game"
+  }
+]

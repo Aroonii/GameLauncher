@@ -1,0 +1,33 @@
+---
+description: "GameLauncher — Instant Play Mobile Gaming Platform"
+alwaysApply: true
+---
+
+## Project Overview
+GameLauncher is a mobile gaming platform built with React Native (Expo, TypeScript) that allows users to instantly play lightweight HTML5/WASM games via WebView.
+
+## Tech Stack
+- Expo SDK 53 (Managed workflow)
+- TypeScript (strict mode)
+- Navigation: React Navigation (Stack)
+- Game execution: WebView (remote or local games)
+- Data: games.json (game catalog)
+- Caching: AsyncStorage
+- Testing: jest-expo + @testing-library/react-native
+
+## Architecture
+- `/screens/` → Game list + WebView screens
+- `/components/` → GameCard and other UI pieces
+- `/services/` → Storage (AsyncStorage)
+- `/data/games.json` → Game metadata (title, image, URL)
+- `/types/` → TypeScript types
+
+## Expectations
+- Game metadata should be fetched dynamically and cached
+- Games should load in WebView and gracefully handle errors
+- Future games can be streamed or embedded via CDN or local bundles
+
+## Future Extensions
+- User login + favorites
+- Game ratings or reviews
+- Rewards, leaderboards, or challenges

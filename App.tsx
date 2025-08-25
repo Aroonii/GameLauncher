@@ -1,20 +1,25 @@
+import { useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { AppNavigator } from './src/navigation/AppNavigator';
+import { ErrorBoundary } from './src/components/ErrorBoundary';
+import { analyticsService } from './src/services/analyticsService';
 
 export default function App() {
+  useEffect(() => {
+    const appStartTime = Date.now();
+    
+    // Log app_open event
+    // Assume cold start for now (could be enhanced with AppState detection)
+    const launchTime = Date.now() - appStartTime;
+    analyticsService.logAppOpen(true, launchTime);
+    
+    console.log('🚀 GameLauncher app initialized');
+  }, []);
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
+    <ErrorBoundary>
+      <AppNavigator />
       <StatusBar style="auto" />
-    </View>
+    </ErrorBoundary>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
