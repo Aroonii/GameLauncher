@@ -1,7 +1,23 @@
 import { Game } from '../types';
 
 // Define event types as per PRD requirements
-export type AnalyticsEventType = 'app_open' | 'catalog_loaded' | 'game_opened' | 'game_error';
+export type AnalyticsEventType = 
+  | 'app_open' 
+  | 'catalog_loaded' 
+  | 'game_opened' 
+  | 'game_error'
+  // Phase 2 events
+  | 'catalog_source'
+  | 'catalog_error'
+  | 'favorites_count'
+  | 'favorite_added'
+  | 'favorite_removed'
+  | 'thumbnail_prefetch_bytes'
+  | 'catalog_fetch_time'
+  | 'cache_hit_rate'
+  | 'memory_usage_peak'
+  | 'privacy_consent'
+  | 'accessibility_feature';
 
 // Base event structure with timestamps and metadata
 export interface BaseEvent {
@@ -45,7 +61,13 @@ export interface GameErrorEvent extends BaseEvent {
   retry_count?: number;
 }
 
-export type AnalyticsEvent = AppOpenEvent | CatalogLoadedEvent | GameOpenedEvent | GameErrorEvent;
+// Generic event for Phase 2 flexible events
+export interface GenericAnalyticsEvent extends BaseEvent {
+  event: AnalyticsEventType;
+  data: Record<string, any>;
+}
+
+export type AnalyticsEvent = AppOpenEvent | CatalogLoadedEvent | GameOpenedEvent | GameErrorEvent | GenericAnalyticsEvent;
 
 class AnalyticsService {
   private sessionId: string;
@@ -76,7 +98,11 @@ class AnalyticsService {
    */
   logAppOpen(coldStart: boolean, launchTimeMs?: number): void {
     const event: AppOpenEvent = {
-      ...this.createBaseEvent('app_open'),
+      event: 'app_open',
+      timestamp: Date.now(),
+      session_id: this.sessionId,
+      user_agent: navigator?.userAgent,
+      app_version: this.appVersion,
       cold_start: coldStart,
       launch_time_ms: launchTimeMs,
     };
@@ -94,7 +120,11 @@ class AnalyticsService {
     networkStatus: 'online' | 'offline'
   ): void {
     const event: CatalogLoadedEvent = {
-      ...this.createBaseEvent('catalog_loaded'),
+      event: 'catalog_loaded',
+      timestamp: Date.now(),
+      session_id: this.sessionId,
+      user_agent: navigator?.userAgent,
+      app_version: this.appVersion,
       games_count: gamesCount,
       load_time_ms: loadTimeMs,
       from_cache: fromCache,
@@ -142,6 +172,18 @@ class AnalyticsService {
   }
 
   /**
+   * Generic event logging method for Phase 2 events
+   */
+  logEvent(eventType: AnalyticsEventType, data: Record<string, any> = {}): void {
+    const event: GenericAnalyticsEvent = {
+      ...this.createBaseEvent(eventType),
+      data,
+    };
+
+    this.trackEvent(event);
+  }
+
+  /**
    * Core event tracking method
    */
   private trackEvent(event: AnalyticsEvent): void {
@@ -176,30 +218,56 @@ class AnalyticsService {
     // Log event-specific data
     switch (event.event) {
       case 'app_open':
-        console.log(`🚀 Cold Start: ${event.cold_start}`);
-        if (event.launch_time_ms) {
-          console.log(`⚡ Launch Time: ${event.launch_time_ms}ms`);
+        console.log(`🚀 Cold Start: ${(event as AppOpenEvent).cold_start}`);
+        if ((event as AppOpenEvent).launch_time_ms) {
+          console.log(`⚡ Launch Time: ${(event as AppOpenEvent).launch_time_ms}ms`);
         }
         break;
         
       case 'catalog_loaded':
-        console.log(`🎮 Games Count: ${event.games_count}`);
-        console.log(`⚡ Load Time: ${event.load_time_ms}ms`);
-        console.log(`💾 From Cache: ${event.from_cache}`);
-        console.log(`🌐 Network: ${event.network_status}`);
+        console.log(`🎮 Games Count: ${(event as CatalogLoadedEvent).games_count}`);
+        console.log(`⚡ Load Time: ${(event as CatalogLoadedEvent).load_time_ms}ms`);
+        console.log(`💾 From Cache: ${(event as CatalogLoadedEvent).from_cache}`);
+        console.log(`🌐 Network: ${(event as CatalogLoadedEvent).network_status}`);
         break;
         
       case 'game_opened':
-        console.log(`🎯 Game: ${event.game_title} (${event.game_id})`);
-        console.log(`🔄 Orientation Changed: ${event.orientation_changed}`);
+        console.log(`🎯 Game: ${(event as GameOpenedEvent).game_title} (${(event as GameOpenedEvent).game_id})`);
+        console.log(`🔄 Orientation Changed: ${(event as GameOpenedEvent).orientation_changed}`);
         break;
         
       case 'game_error':
-        console.log(`❌ Game: ${event.game_title} (${event.game_id})`);
-        console.log(`🚫 Error Type: ${event.error_type}`);
-        console.log(`💬 Message: ${event.error_message}`);
-        if (event.retry_count !== undefined) {
-          console.log(`🔄 Retry Count: ${event.retry_count}`);
+        console.log(`❌ Game: ${(event as GameErrorEvent).game_title} (${(event as GameErrorEvent).game_id})`);
+        console.log(`🚫 Error Type: ${(event as GameErrorEvent).error_type}`);
+        console.log(`💬 Message: ${(event as GameErrorEvent).error_message}`);
+        if ((event as GameErrorEvent).retry_count !== undefined) {
+          console.log(`🔄 Retry Count: ${(event as GameErrorEvent).retry_count}`);
+        }
+        break;
+
+      // Handle generic Phase 2 events
+      case 'catalog_source':
+        const catalogEvent = event as GenericAnalyticsEvent;
+        console.log(`📡 Source: ${catalogEvent.data.source}`);
+        console.log(`⚙️ Mode: ${catalogEvent.data.catalog_mode}`);
+        console.log(`⚡ Fetch Time: ${catalogEvent.data.fetch_time}ms`);
+        console.log(`🎮 Games Count: ${catalogEvent.data.games_count}`);
+        break;
+        
+      case 'catalog_error':
+        const errorEvent = event as GenericAnalyticsEvent;
+        console.log(`🚫 Error Type: ${errorEvent.data.error_type}`);
+        console.log(`💬 Message: ${errorEvent.data.error_message}`);
+        console.log(`🔄 Fallback: ${errorEvent.data.fallback_used}`);
+        break;
+
+      default:
+        // Generic handling for other Phase 2 events
+        if ('data' in event) {
+          const genericEvent = event as GenericAnalyticsEvent;
+          Object.entries(genericEvent.data).forEach(([key, value]) => {
+            console.log(`🔍 ${key}: ${value}`);
+          });
         }
         break;
     }

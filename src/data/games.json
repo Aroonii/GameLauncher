@@ -5,8 +5,8 @@
     "image": "https://via.placeholder.com/200x200/8e44ad/ffffff?text=%F0%9F%A7%A9%E2%80%8BTetris",
     "url": "https://htmltetris.cz/",
     "preferredOrientation": "portrait",
-    "category": "Puzzle",
-    "description": "Classic block-stacking puzzle game"
+    "category": "puzzle",
+    "description": "Classic block-stacking puzzle game that never gets old"
   },
   {
     "id": "2",
@@ -14,8 +14,8 @@
     "image": "https://via.placeholder.com/200x200/e74c3c/ffffff?text=%F0%9F%8F%8E%E2%80%8BRacing",
     "url": "https://hexgl.bkcore.com/",
     "preferredOrientation": "landscape",
-    "category": "Racing",
-    "description": "Futuristic high-speed racing"
+    "category": "racing",
+    "description": "Futuristic high-speed racing through neon-lit tracks"
   },
   {
     "id": "3",
@@ -23,8 +23,8 @@
     "image": "https://via.placeholder.com/200x200/f39c12/ffffff?text=%F0%9F%90%A6%E2%80%8BFlappy",
     "url": "https://flappybird.io/",
     "preferredOrientation": "landscape",
-    "category": "Arcade",
-    "description": "Tap to fly through pipes"
+    "category": "arcade",
+    "description": "Tap to fly through pipes in this addictive classic"
   },
   {
     "id": "4",
@@ -32,8 +32,8 @@
     "image": "https://via.placeholder.com/200x200/27ae60/ffffff?text=%F0%9F%8F%83%E2%80%8BRunner",
     "url": "https://plays.org/tomb-runner/",
     "preferredOrientation": "landscape",
-    "category": "Adventure",
-    "description": "Endless temple running adventure"
+    "category": "adventure",
+    "description": "Endless temple running with treasure and danger"
   },
   {
     "id": "5",
@@ -41,8 +41,8 @@
     "image": "https://via.placeholder.com/200x200/3498db/ffffff?text=%F0%9F%94%A2%E2%80%8B2048",
     "url": "https://play2048.co/",
     "preferredOrientation": "portrait",
-    "category": "Puzzle",
-    "description": "Combine tiles to reach 2048"
+    "category": "puzzle",
+    "description": "Combine numbered tiles to reach the magic 2048"
   },
   {
     "id": "6",
@@ -50,16 +50,61 @@
     "image": "https://via.placeholder.com/200x200/f1c40f/000000?text=%F0%9F%91%BE%E2%80%8BPac-Man",
     "url": "https://pacman.platzh1rsch.ch/",
     "preferredOrientation": "landscape",
-    "category": "Arcade",
-    "description": "Classic arcade maze game"
+    "category": "arcade",
+    "description": "Eat dots, avoid ghosts, and collect power-ups"
   },
   {
     "id": "7",
+    "title": "Snake Game",
+    "image": "https://via.placeholder.com/200x200/2ecc71/ffffff?text=%F0%9F%90%8D%E2%80%8BSnake",
+    "url": "https://playsnake.org/",
+    "preferredOrientation": "landscape",
+    "category": "casual",
+    "description": "Guide your snake to eat food and grow longer"
+  },
+  {
+    "id": "8",
+    "title": "Chess",
+    "image": "https://via.placeholder.com/200x200/34495e/ffffff?text=%E2%99%9F%E2%80%8BChess",
+    "url": "https://lichess.org/",
+    "preferredOrientation": "portrait",
+    "category": "strategy",
+    "description": "Classic strategic board game for tactical minds"
+  },
+  {
+    "id": "9",
+    "title": "Basketball",
+    "image": "https://via.placeholder.com/200x200/e67e22/ffffff?text=%E2%9A%BD%E2%80%8BBall",
+    "url": "https://www.addictinggames.com/sports-games/basketball-legends",
+    "preferredOrientation": "landscape",
+    "category": "sports",
+    "description": "Shoot hoops and score points in this basketball game"
+  },
+  {
+    "id": "10",
+    "title": "Solitaire",
+    "image": "https://via.placeholder.com/200x200/9b59b6/ffffff?text=%F0%9F%83%8E%E2%80%8BSolitaire",
+    "url": "https://solitaired.com/",
+    "preferredOrientation": "portrait",
+    "category": "casual",
+    "description": "The timeless card game perfect for relaxing"
+  },
+  {
+    "id": "11",
+    "title": "Tower Defense",
+    "image": "https://via.placeholder.com/200x200/16a085/ffffff?text=%F0%9F%8F%B0%E2%80%8BTower",
+    "url": "https://www.addictinggames.com/strategy-games/bloons-tower-defense",
+    "preferredOrientation": "landscape",
+    "category": "strategy",
+    "description": "Build towers and defend against waves of enemies"
+  },
+  {
+    "id": "12",
     "title": "Broken Game",
     "image": "https://via.placeholder.com/200x200/95a5a6/ffffff?text=%E2%9A%A0%EF%B8%8F%E2%80%8BTest",
     "url": "https://example.com/nonexistent-game",
     "preferredOrientation": "landscape",
-    "category": "Test",
-    "description": "Error testing game"
+    "category": "uncategorized",
+    "description": "Error testing game for development purposes"
   }
 ]
