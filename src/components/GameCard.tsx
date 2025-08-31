@@ -37,26 +37,19 @@ export const GameCard: React.FC<GameCardProps> = ({
     return String(text);
   };
 
-  // Get emoji for game type
-  const getGameEmoji = (category: string, title: string): string => {
-    if (title?.toLowerCase().includes('tetris')) return '🧩';
-    if (title?.toLowerCase().includes('racing') || title?.toLowerCase().includes('hexgl')) return '🏎️';
-    if (title?.toLowerCase().includes('2048')) return '🔢';
-    if (title?.toLowerCase().includes('pacman') || title?.toLowerCase().includes('pac-man')) return '👻';
-    if (title?.toLowerCase().includes('snake') || title?.toLowerCase().includes('slither')) return '🐍';
-    if (title?.toLowerCase().includes('chess')) return '♟️';
-    if (title?.toLowerCase().includes('solitaire')) return '🃏';
-    if (title?.toLowerCase().includes('hextris')) return '⬡';
-    
-    // Category fallbacks
-    switch (category) {
-      case 'puzzle': return '🧩';
-      case 'racing': return '🏎️';
-      case 'arcade': return '🕹️';
-      case 'strategy': return '♟️';
-      case 'casual': return '🎲';
-      case 'action': return '⚔️';
-      default: return '🎮';
+  // Get image source for game
+  const getImageSource = (title: string) => {
+    switch (title) {
+      case 'Tetris': return require('../../logos/tetris.png');
+      case 'HexGL Racing': return require('../../logos/hexgl.jpg');
+      case '2048': return require('../../logos/2048.avif');
+      case 'Pac-Man': return require('../../logos/pacman.jpg');
+      case 'Snake Game': return require('../../logos/snake.jpg');
+      case 'Chess': return { uri: game.image };
+      case 'Solitaire': return require('../../logos/solitaire.png');
+      case 'Hextris': return require('../../logos/hextris.png');
+      case 'Slither.io': return require('../../logos/slither.jpg');
+      default: return { uri: `data:image/svg+xml;base64,${btoa(`<svg width="200" height="200" xmlns="http://www.w3.org/2000/svg"><rect width="200" height="200" fill="${primaryColor}"/><text x="100" y="100" text-anchor="middle" dy=".3em" fill="white" font-family="Arial, sans-serif" font-size="16" font-weight="bold">${safeText(game.title, 'GAME').toUpperCase()}</text></svg>`)}` };
     }
   };
 
@@ -106,10 +99,9 @@ export const GameCard: React.FC<GameCardProps> = ({
       >
         <View style={styles.imageContainer}>
           <Image 
-            source={game.image?.startsWith('http') ? { uri: game.image } : require(`../../${game.image}`)}
+            source={getImageSource(game.title)}
             style={styles.image}
             resizeMode="cover"
-            defaultSource={{ uri: `data:image/svg+xml;base64,${btoa(`<svg width="200" height="200" xmlns="http://www.w3.org/2000/svg"><rect width="200" height="200" fill="${primaryColor}"/><text x="100" y="100" text-anchor="middle" dy=".3em" fill="white" font-family="Arial, sans-serif" font-size="16" font-weight="bold">${safeText(game.title, 'GAME').toUpperCase()}</text></svg>`)}` }}
           />
           <LinearGradient
             colors={['transparent', 'rgba(0,0,0,0.7)']}
