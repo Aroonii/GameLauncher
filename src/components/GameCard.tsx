@@ -37,6 +37,29 @@ export const GameCard: React.FC<GameCardProps> = ({
     return String(text);
   };
 
+  // Get emoji for game type
+  const getGameEmoji = (category: string, title: string): string => {
+    if (title?.toLowerCase().includes('tetris')) return '🧩';
+    if (title?.toLowerCase().includes('racing') || title?.toLowerCase().includes('hexgl')) return '🏎️';
+    if (title?.toLowerCase().includes('2048')) return '🔢';
+    if (title?.toLowerCase().includes('pacman') || title?.toLowerCase().includes('pac-man')) return '👻';
+    if (title?.toLowerCase().includes('snake') || title?.toLowerCase().includes('slither')) return '🐍';
+    if (title?.toLowerCase().includes('chess')) return '♟️';
+    if (title?.toLowerCase().includes('solitaire')) return '🃏';
+    if (title?.toLowerCase().includes('hextris')) return '⬡';
+    
+    // Category fallbacks
+    switch (category) {
+      case 'puzzle': return '🧩';
+      case 'racing': return '🏎️';
+      case 'arcade': return '🕹️';
+      case 'strategy': return '♟️';
+      case 'casual': return '🎲';
+      case 'action': return '⚔️';
+      default: return '🎮';
+    }
+  };
+
   const handlePressIn = () => {
     Animated.spring(scaleAnim, {
       toValue: 0.95,
@@ -83,9 +106,10 @@ export const GameCard: React.FC<GameCardProps> = ({
       >
         <View style={styles.imageContainer}>
           <Image 
-            source={{ uri: game.image || `data:image/svg+xml;base64,${btoa(`<svg width="200" height="200" xmlns="http://www.w3.org/2000/svg"><rect width="200" height="200" fill="${primaryColor}"/><text x="100" y="100" text-anchor="middle" dy=".3em" fill="white" font-family="Arial, sans-serif" font-size="16" font-weight="bold">${safeText(game.title, 'GAME').toUpperCase()}</text></svg>`)}` }}
+            source={game.image?.startsWith('http') ? { uri: game.image } : require(`../../${game.image}`)}
             style={styles.image}
             resizeMode="cover"
+            defaultSource={{ uri: `data:image/svg+xml;base64,${btoa(`<svg width="200" height="200" xmlns="http://www.w3.org/2000/svg"><rect width="200" height="200" fill="${primaryColor}"/><text x="100" y="100" text-anchor="middle" dy=".3em" fill="white" font-family="Arial, sans-serif" font-size="16" font-weight="bold">${safeText(game.title, 'GAME').toUpperCase()}</text></svg>`)}` }}
           />
           <LinearGradient
             colors={['transparent', 'rgba(0,0,0,0.7)']}
@@ -265,12 +289,16 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
     letterSpacing: 0.8,
   },
-  placeholderText: {
+  gameEmoji: {
+    fontSize: 48,
+    marginBottom: 8,
+  },
+  gameTitle: {
     color: '#fff',
-    fontSize: 14,
-    fontWeight: '800',
+    fontSize: 12,
+    fontWeight: '700',
     textAlign: 'center',
-    textShadowColor: 'rgba(0,0,0,0.3)',
+    textShadowColor: 'rgba(0,0,0,0.5)',
     textShadowOffset: { width: 1, height: 1 },
     textShadowRadius: 2,
   },

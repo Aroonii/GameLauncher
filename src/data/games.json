@@ -2,7 +2,7 @@
   {
     "id": "1",
     "title": "Tetris",
-    "image": "https://htmltetris.cz/images/tetris.png",
+    "image": "logos/tetris.png",
     "url": "https://htmltetris.cz/",
     "preferredOrientation": "portrait",
     "category": "puzzle",
