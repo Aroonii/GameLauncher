@@ -243,16 +243,21 @@ export const GameListScreen: React.FC<Props> = ({ navigation }) => {
     }
   };
 
-  const renderGameCard = ({ item }: { item: EnhancedGame }) => {
-    console.log('Rendering game card for:', item?.title, item?.id);
+  const renderGameCard = ({ item }: { item: EnhancedGame[] }) => {
     return (
-      <GameCard 
-        game={item} 
-        onPress={() => handleGamePress(item)}
-        onFavoriteToggle={privacyService.isFavoritesAllowed() ? handleFavoriteToggle : undefined}
-        showFavorite={configService.isFeatureEnabled('favorites')}
-        showPlayCount={true}
-      />
+      <View style={styles.gameRow}>
+        {item.map((game, index) => (
+          <GameCard 
+            key={game?.id || index}
+            game={game} 
+            onPress={() => handleGamePress(game)}
+            onFavoriteToggle={privacyService.isFavoritesAllowed() ? handleFavoriteToggle : undefined}
+            showFavorite={configService.isFeatureEnabled('favorites')}
+          />
+        ))}
+        {/* Add spacer if odd number of games */}
+        {item.length === 1 && <View style={styles.gameCardSpacer} />}
+      </View>
     );
   };
 
@@ -310,16 +315,24 @@ export const GameListScreen: React.FC<Props> = ({ navigation }) => {
       <SectionList
         sections={(categorizedGames || []).map(categoryGroup => {
           console.log('Section data:', categoryGroup.category?.title, 'games:', categoryGroup.games?.length);
+          
+          // Group games in pairs for 2-column layout
+          const games = categoryGroup.games || [];
+          const gameRows = [];
+          for (let i = 0; i < games.length; i += 2) {
+            gameRows.push(games.slice(i, i + 2));
+          }
+          
           return {
             title: categoryGroup.category?.title || 'Unknown Category',
-            data: categoryGroup.games || [],
+            data: gameRows,
             category: categoryGroup.category,
             gameCount: categoryGroup.gameCount,
           };
         })}
         renderItem={renderGameCard}
         renderSectionHeader={renderCategoryHeader}
-        keyExtractor={(item) => item?.id || Math.random().toString()}
+        keyExtractor={(item, index) => item.map(game => game?.id).join('-') || index.toString()}
         contentContainerStyle={styles.listContainer}
         showsVerticalScrollIndicator={false}
         stickySectionHeadersEnabled={false}
@@ -395,7 +408,7 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
   listContainer: {
-    padding: 16,
+    padding: 8,
     paddingTop: 20,
   },
   loadingContainer: {
@@ -440,5 +453,14 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#95a5a6',
     fontStyle: 'italic',
+  },
+  gameRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: 4,
+  },
+  gameCardSpacer: {
+    flex: 1,
+    maxWidth: '50%',
   },
 });
