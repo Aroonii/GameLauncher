@@ -37,8 +37,14 @@ class ConfigService {
             this.currentConfig = {
               ...defaultAppConfig,
               ...storedConfig,
+              // Force remote catalog for testing
+              catalogMode: 'REMOTE',
+              remoteCatalog: {
+                ...defaultAppConfig.remoteCatalog,
+                url: 'https://aroonii.github.io/GameLauncher/catalog.json',
+              },
             };
-            console.log('Configuration loaded from storage');
+            console.log('Configuration loaded from storage with remote catalog override');
           } else {
             console.warn('Stored configuration failed validation, using defaults');
             await this.resetToDefaults();

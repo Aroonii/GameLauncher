@@ -64,15 +64,6 @@
   },
   {
     "id": "8",
-    "title": "Tower Defense",
-    "image": "https://via.placeholder.com/200x200/16a085/ffffff?text=%F0%9F%8F%B0%E2%80%8BTower",
-    "url": "https://www.addictinggames.com/strategy-games/bloons-tower-defense",
-    "preferredOrientation": "landscape",
-    "category": "strategy",
-    "description": "Build towers and defend against waves of enemies"
-  },
-  {
-    "id": "9",
     "title": "Broken Game",
     "image": "https://via.placeholder.com/200x200/95a5a6/ffffff?text=%E2%9A%A0%EF%B8%8F%E2%80%8BTest",
     "url": "https://example.com/nonexistent-game",

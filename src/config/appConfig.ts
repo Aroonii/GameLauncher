@@ -40,9 +40,9 @@ const getEnvironmentConfig = (): Partial<AppConfig> => {
   const isDevelopment = __DEV__;
   
   return {
-    catalogMode: 'BUNDLED', // Default to bundled for safety
+    catalogMode: 'REMOTE', // Test remote catalog
     remoteCatalog: {
-      url: undefined, // No remote URL by default
+      url: 'https://aroonii.github.io/GameLauncher/catalog.json',
       fallbackToBundled: true,
       validateSchema: true,
     },
@@ -89,9 +89,9 @@ const createDefaultConfig = (): AppConfig => {
   const overrides = __DEV__ ? {} : getProductionOverrides();
   
   return {
-    catalogMode: 'BUNDLED',
+    catalogMode: 'REMOTE',
     remoteCatalog: {
-      url: undefined,
+      url: 'https://aroonii.github.io/GameLauncher/catalog.json',
       fallbackToBundled: true,
       validateSchema: true,
     },

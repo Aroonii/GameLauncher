@@ -245,7 +245,7 @@ class CategoryUtils {
           game.lastPlayed > recentThreshold &&
           !game.isFavorite // Don't duplicate with favorites
         )
-        .slice(0, 10); // Limit to 10 recent games
+        .slice(0, 2); // Limit to 2 recent games
 
       if (recentGames.length > 0) {
         result.push({

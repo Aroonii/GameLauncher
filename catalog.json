@@ -2,7 +2,7 @@
   {
     "id": "1",
     "title": "Tetris",
-    "image": "https://via.placeholder.com/200x200/8e44ad/ffffff?text=%F0%9F%A7%A9%E2%80%8BTetris",
+    "image": "https://picsum.photos/200/200?random=1",
     "url": "https://htmltetris.cz/",
     "preferredOrientation": "portrait",
     "category": "puzzle",
@@ -11,7 +11,7 @@
   {
     "id": "2",
     "title": "HexGL Racing",
-    "image": "https://via.placeholder.com/200x200/e74c3c/ffffff?text=%F0%9F%8F%8E%E2%80%8BRacing",
+    "image": "https://picsum.photos/200/200?random=2",
     "url": "https://hexgl.bkcore.com/",
     "preferredOrientation": "landscape",
     "category": "racing",
@@ -20,7 +20,7 @@
   {
     "id": "3",
     "title": "2048",
-    "image": "https://via.placeholder.com/200x200/3498db/ffffff?text=%F0%9F%94%A2%E2%80%8B2048",
+    "image": "https://picsum.photos/200/200?random=3",
     "url": "https://play2048.co/",
     "preferredOrientation": "portrait",
     "category": "puzzle",
@@ -29,7 +29,7 @@
   {
     "id": "4",
     "title": "Pac-Man",
-    "image": "https://via.placeholder.com/200x200/f1c40f/000000?text=%F0%9F%91%BE%E2%80%8BPac-Man",
+    "image": "https://picsum.photos/200/200?random=4",
     "url": "https://pacman.platzh1rsch.ch/",
     "preferredOrientation": "landscape",
     "category": "arcade",
@@ -38,7 +38,7 @@
   {
     "id": "5",
     "title": "Snake Game",
-    "image": "https://via.placeholder.com/200x200/2ecc71/ffffff?text=%F0%9F%90%8D%E2%80%8BSnake",
+    "image": "https://picsum.photos/200/200?random=5",
     "url": "https://playsnake.org/",
     "preferredOrientation": "landscape",
     "category": "casual",
@@ -47,7 +47,7 @@
   {
     "id": "6",
     "title": "Chess",
-    "image": "https://via.placeholder.com/200x200/34495e/ffffff?text=%E2%99%9F%E2%80%8BChess",
+    "image": "https://picsum.photos/200/200?random=6",
     "url": "https://lichess.org/",
     "preferredOrientation": "portrait",
     "category": "strategy",
@@ -56,7 +56,7 @@
   {
     "id": "7",
     "title": "Solitaire",
-    "image": "https://via.placeholder.com/200x200/9b59b6/ffffff?text=%F0%9F%83%8E%E2%80%8BSolitaire",
+    "image": "https://picsum.photos/200/200?random=7",
     "url": "https://solitaired.com/",
     "preferredOrientation": "portrait",
     "category": "casual",
@@ -64,20 +64,20 @@
   },
   {
     "id": "8",
-    "title": "Tower Defense",
-    "image": "https://via.placeholder.com/200x200/16a085/ffffff?text=%F0%9F%8F%B0%E2%80%8BTower",
-    "url": "https://www.addictinggames.com/strategy-games/bloons-tower-defense",
-    "preferredOrientation": "landscape",
-    "category": "strategy",
-    "description": "Build towers and defend against waves of enemies"
+    "title": "Hextris",
+    "image": "https://picsum.photos/200/200?random=8",
+    "url": "https://hextris.io/",
+    "preferredOrientation": "portrait",
+    "category": "puzzle",
+    "description": "Fast-paced hexagonal puzzle game with smooth animations"
   },
   {
     "id": "9",
-    "title": "Broken Game",
-    "image": "https://via.placeholder.com/200x200/95a5a6/ffffff?text=%E2%9A%A0%EF%B8%8F%E2%80%8BTest",
-    "url": "https://example.com/nonexistent-game",
+    "title": "Slither.io",
+    "image": "https://picsum.photos/200/200?random=9",
+    "url": "https://slither.io/",
     "preferredOrientation": "landscape",
-    "category": "uncategorized",
-    "description": "Error testing game for development purposes"
+    "category": "action",
+    "description": "Massive multiplayer snake game with smooth graphics"
   }
 ]
