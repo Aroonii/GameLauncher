@@ -11,7 +11,7 @@
   {
     "id": "2",
     "title": "HexGL Racing",
-    "image": "https://via.placeholder.com/200x200/e74c3c/ffffff?text=RACING",
+    "image": "https://hexgl.bkcore.com/css/images/hexgl.jpg",
     "url": "https://hexgl.bkcore.com/",
     "preferredOrientation": "landscape",
     "category": "racing",
@@ -20,7 +20,7 @@
   {
     "id": "3",
     "title": "2048",
-    "image": "https://via.placeholder.com/200x200/3498db/ffffff?text=2048",
+    "image": "https://play2048.co/img/2048-logo.svg",
     "url": "https://play2048.co/",
     "preferredOrientation": "portrait",
     "category": "puzzle",
@@ -29,7 +29,7 @@
   {
     "id": "4",
     "title": "Pac-Man",
-    "image": "https://via.placeholder.com/200x200/f1c40f/000000?text=PACMAN",
+    "image": "https://pacman.platzh1rsch.ch/images/pacman.png",
     "url": "https://pacman.platzh1rsch.ch/",
     "preferredOrientation": "landscape",
     "category": "arcade",
@@ -38,7 +38,7 @@
   {
     "id": "5",
     "title": "Snake Game",
-    "image": "https://via.placeholder.com/200x200/2ecc71/ffffff?text=SNAKE",
+    "image": "https://playsnake.org/images/snake-game.png",
     "url": "https://playsnake.org/",
     "preferredOrientation": "landscape",
     "category": "casual",
@@ -47,7 +47,7 @@
   {
     "id": "6",
     "title": "Chess",
-    "image": "https://via.placeholder.com/200x200/34495e/ffffff?text=CHESS",
+    "image": "https://lichess1.org/assets/_fuiJqG/logo/lichess-favicon-256.png",
     "url": "https://lichess.org/",
     "preferredOrientation": "portrait",
     "category": "strategy",
@@ -56,7 +56,7 @@
   {
     "id": "7",
     "title": "Solitaire",
-    "image": "https://via.placeholder.com/200x200/9b59b6/ffffff?text=SOLITAIRE",
+    "image": "https://solitaired.com/favicon-96x96.png",
     "url": "https://solitaired.com/",
     "preferredOrientation": "portrait",
     "category": "casual",
@@ -65,7 +65,7 @@
   {
     "id": "8",
     "title": "Hextris",
-    "image": "https://via.placeholder.com/200x200/e67e22/ffffff?text=HEXTRIS",
+    "image": "https://hextris.io/images/hextris-icon.png",
     "url": "https://hextris.io/",
     "preferredOrientation": "portrait",
     "category": "puzzle",
@@ -74,7 +74,7 @@
   {
     "id": "9",
     "title": "Slither.io",
-    "image": "https://via.placeholder.com/200x200/27ae60/ffffff?text=SLITHER",
+    "image": "https://slither.io/img/logo.png",
     "url": "https://slither.io/",
     "preferredOrientation": "landscape",
     "category": "action",
