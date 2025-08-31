@@ -271,7 +271,7 @@ export const GameListScreen: React.FC<Props> = ({ navigation }) => {
   if (loading) {
     return (
       <LinearGradient
-        colors={['#667eea', '#764ba2']}
+        colors={['#0f0f23', '#1a1a2e', '#16213e']}
         style={styles.loadingContainer}
       >
         <StatusBar barStyle="light-content" />
@@ -285,11 +285,11 @@ export const GameListScreen: React.FC<Props> = ({ navigation }) => {
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="light-content" />
       <LinearGradient
-        colors={['#667eea', '#764ba2']}
+        colors={['#1a1a2e', '#16213e', '#0f3460']}
         style={styles.headerGradient}
       >
         <View style={styles.headerContent}>
-          <Text style={styles.headerTitle}>🎮 GameLauncher</Text>
+          <Text style={styles.headerTitle}>🎮 KORA</Text>
           <Text style={styles.headerSubtitle}>
             {games?.length || 0} games • {categorizedGames?.length || 0} categories
           </Text>
@@ -367,7 +367,7 @@ export const GameListScreen: React.FC<Props> = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f8f9fa',
+    backgroundColor: '#0f0f23',
   },
   headerGradient: {
     paddingTop: 20,

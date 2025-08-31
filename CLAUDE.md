@@ -10,11 +10,18 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `npm run ios` - Start on iOS device/simulator  
 - `npm run web` - Start web development server
 
+### Testing
+- `npm test` - Run all tests
+- `npm run test:watch` - Run tests in watch mode during development
+- `npm run test:coverage` - Run tests with coverage report
+- `npm run test:ci` - Run tests for CI environments
+
 ### Git Workflow
 - **IMPORTANT**: Always ask before committing changes to ensure proper testing
 - Test all changes thoroughly before adding to git
 - Never commit untested code or experimental changes
 - Always confirm with user before running `git add` and `git commit` commands
+- **MANDATORY**: Run `npm test` before any commit to ensure all tests pass
 
 ## Architecture
 
@@ -82,7 +89,33 @@ Use these files when I request structured feature development using PRDs:
 - `/ai-dev-tasks/generate-tasks.md` 
 - `/ai-dev-tasks/process-task-list.md`
 
-## Testing
+## Testing Framework
+
+### Test Requirements
+- **MANDATORY**: All new functionality MUST include comprehensive unit tests
+- **MANDATORY**: Run `npm test` after implementing any feature to ensure all tests pass
+- **MANDATORY**: Achieve minimum 80% test coverage for new code
+- **MANDATORY**: Test both success and error scenarios for all new functions
+
+### Test Structure
+- **Services**: Test all public methods, error handling, and state management
+- **Components**: Test rendering, user interactions, and prop handling  
+- **Utilities**: Test all helper functions with edge cases and invalid inputs
+- **Integration**: Test service interactions and data flow
+
+### Test Files Location
+- Service tests: `src/services/__tests__/[serviceName].test.ts`
+- Component tests: `src/components/__tests__/[componentName].test.tsx` 
+- Utility tests: `src/utils/__tests__/[utilityName].test.ts`
+
+### Manual Testing
 - **Development**: Use `npm run start` with tunnel mode for device testing
 - **Performance**: Test with heavier games like Slither.io and HexGL Racing
 - **Network**: Test offline/online scenarios with remote catalog fallbacks
+
+### Test Standards
+- Use descriptive test names that explain what is being tested
+- Mock external dependencies (AsyncStorage, NetInfo, etc.)
+- Test error scenarios and edge cases
+- Verify analytics and privacy compliance in tests
+- Ensure tests are fast and reliable (no flaky tests)

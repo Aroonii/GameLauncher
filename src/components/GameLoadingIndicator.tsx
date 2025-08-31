@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
+import React, { useEffect, useRef } from 'react';
+import { View, Text, StyleSheet, ActivityIndicator, Animated } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
 interface Props {
@@ -13,33 +13,114 @@ export const GameLoadingIndicator: React.FC<Props> = ({
   progress, 
   isVisible 
 }) => {
+  const fadeAnim = useRef(new Animated.Value(0)).current;
+  const scaleAnim = useRef(new Animated.Value(0.8)).current;
+  const pulseAnim = useRef(new Animated.Value(1)).current;
+  const progressAnim = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    if (isVisible) {
+      // Entrance animation
+      Animated.parallel([
+        Animated.timing(fadeAnim, {
+          toValue: 1,
+          duration: 300,
+          useNativeDriver: true,
+        }),
+        Animated.spring(scaleAnim, {
+          toValue: 1,
+          tension: 100,
+          friction: 8,
+          useNativeDriver: true,
+        }),
+      ]).start();
+
+      // Continuous pulse animation
+      const pulseAnimation = Animated.loop(
+        Animated.sequence([
+          Animated.timing(pulseAnim, {
+            toValue: 1.1,
+            duration: 1000,
+            useNativeDriver: true,
+          }),
+          Animated.timing(pulseAnim, {
+            toValue: 1,
+            duration: 1000,
+            useNativeDriver: true,
+          }),
+        ])
+      );
+      pulseAnimation.start();
+
+      return () => pulseAnimation.stop();
+    } else {
+      // Exit animation
+      Animated.timing(fadeAnim, {
+        toValue: 0,
+        duration: 200,
+        useNativeDriver: true,
+      }).start();
+    }
+  }, [isVisible]);
+
+  useEffect(() => {
+    // Smooth progress bar animation
+    Animated.timing(progressAnim, {
+      toValue: progress,
+      duration: 200,
+      useNativeDriver: false,
+    }).start();
+  }, [progress]);
+
   if (!isVisible) return null;
 
   const progressPercentage = Math.round(progress * 100);
 
   return (
-    <View style={styles.container}>
+    <Animated.View 
+      style={[
+        styles.container, 
+        { 
+          opacity: fadeAnim,
+          transform: [{ scale: scaleAnim }]
+        }
+      ]}
+    >
       <LinearGradient
         colors={['rgba(102, 126, 234, 0.95)', 'rgba(118, 75, 162, 0.95)']}
         style={styles.backdrop}
       />
       <View style={styles.content}>
-        <View style={styles.iconContainer}>
+        <Animated.View 
+          style={[
+            styles.iconContainer,
+            { transform: [{ scale: pulseAnim }] }
+          ]}
+        >
           <Text style={styles.gameIcon}>🎮</Text>
-        </View>
+        </Animated.View>
         <Text style={styles.title}>Loading {gameTitle}</Text>
         
         <View style={styles.progressContainer}>
           <View style={styles.progressBar}>
-            <LinearGradient
-              colors={['#4facfe', '#00f2fe']}
+            <Animated.View
               style={[
                 styles.progressFill,
-                { width: `${progressPercentage}%` }
+                {
+                  width: progressAnim.interpolate({
+                    inputRange: [0, 1],
+                    outputRange: ['0%', '100%'],
+                  }),
+                }
               ]}
-              start={{ x: 0, y: 0 }}
-              end={{ x: 1, y: 0 }}
-            />
+            >
+              <LinearGradient
+                colors={['#4facfe', '#00f2fe']}
+                style={styles.progressGradient}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 0 }}
+              />
+            </Animated.View>
           </View>
           <Text style={styles.progressText}>{progressPercentage}%</Text>
         </View>
@@ -57,7 +138,7 @@ export const GameLoadingIndicator: React.FC<Props> = ({
            'Starting game...'}
         </Text>
       </View>
-    </View>
+    </Animated.View>
   );
 };
 
@@ -124,6 +205,11 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   progressFill: {
+    height: '100%',
+    borderRadius: 3,
+  },
+  progressGradient: {
+    width: '100%',
     height: '100%',
     borderRadius: 3,
   },

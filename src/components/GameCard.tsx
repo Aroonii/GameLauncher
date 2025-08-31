@@ -19,6 +19,7 @@ export const GameCard: React.FC<GameCardProps> = ({
   showFavorite = true 
 }) => {
   const [scaleAnim] = useState(new Animated.Value(1));
+  const [glowAnim] = useState(new Animated.Value(0));
 
   // Defensive checks
   if (!game) {
@@ -54,19 +55,33 @@ export const GameCard: React.FC<GameCardProps> = ({
   };
 
   const handlePressIn = () => {
-    Animated.spring(scaleAnim, {
-      toValue: 0.95,
-      useNativeDriver: true,
-    }).start();
+    Animated.parallel([
+      Animated.spring(scaleAnim, {
+        toValue: 0.92,
+        useNativeDriver: true,
+      }),
+      Animated.timing(glowAnim, {
+        toValue: 1,
+        duration: 150,
+        useNativeDriver: false,
+      }),
+    ]).start();
   };
 
   const handlePressOut = () => {
-    Animated.spring(scaleAnim, {
-      toValue: 1,
-      friction: 3,
-      tension: 100,
-      useNativeDriver: true,
-    }).start();
+    Animated.parallel([
+      Animated.spring(scaleAnim, {
+        toValue: 1,
+        friction: 4,
+        tension: 120,
+        useNativeDriver: true,
+      }),
+      Animated.timing(glowAnim, {
+        toValue: 0,
+        duration: 200,
+        useNativeDriver: false,
+      }),
+    ]).start();
   };
 
   const handleFavoritePress = () => {
@@ -88,15 +103,28 @@ export const GameCard: React.FC<GameCardProps> = ({
   
   return (
     <Animated.View style={[styles.container, { transform: [{ scale: scaleAnim }] }]}>
-      <TouchableOpacity 
-        style={dynamicTouchableStyle}
-        onPress={onPress}
-        onPressIn={handlePressIn}
-        onPressOut={handlePressOut}
-        activeOpacity={0.9}
-        accessibilityRole="button"
-        accessibilityLabel={`Play ${safeText(game.title, 'game')}`}
-      >
+      <Animated.View style={[
+        styles.glowContainer,
+        {
+          shadowColor: primaryColor,
+          shadowOpacity: glowAnim,
+          shadowRadius: 15,
+          shadowOffset: { width: 0, height: 8 },
+          elevation: glowAnim.interpolate({
+            inputRange: [0, 1],
+            outputRange: [8, 20],
+          }),
+        }
+      ]}>
+        <TouchableOpacity 
+          style={dynamicTouchableStyle}
+          onPress={onPress}
+          onPressIn={handlePressIn}
+          onPressOut={handlePressOut}
+          activeOpacity={0.85}
+          accessibilityRole="button"
+          accessibilityLabel={`Play ${safeText(game.title, 'game')}`}
+        >
         <View style={styles.imageContainer}>
           <Image 
             source={getImageSource(game.title)}
@@ -159,6 +187,7 @@ export const GameCard: React.FC<GameCardProps> = ({
         </View>
       </TouchableOpacity>
     </Animated.View>
+  </Animated.View>
   );
 };
 
@@ -168,8 +197,12 @@ const styles = StyleSheet.create({
     margin: 6,
     maxWidth: '50%',
   },
+  glowContainer: {
+    flex: 1,
+    borderRadius: 18,
+  },
   touchable: {
-    backgroundColor: '#fff',
+    backgroundColor: '#1e1e2e',
     borderRadius: 18,
     overflow: 'hidden',
     shadowColor: '#000',
@@ -177,11 +210,11 @@ const styles = StyleSheet.create({
       width: 0,
       height: 6,
     },
-    shadowOpacity: 0.15,
+    shadowOpacity: 0.3,
     shadowRadius: 12,
     elevation: 8,
     borderWidth: 1,
-    borderColor: 'rgba(0,0,0,0.05)',
+    borderColor: 'rgba(255,255,255,0.1)',
   },
   imageContainer: {
     position: 'relative',
@@ -251,12 +284,12 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 17,
     fontWeight: '800',
-    color: '#2c3e50',
+    color: '#ffffff',
     marginBottom: 6,
   },
   description: {
     fontSize: 13,
-    color: '#7f8c8d',
+    color: '#a0a0a0',
     lineHeight: 18,
     marginBottom: 14,
   },
