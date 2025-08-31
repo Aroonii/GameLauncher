@@ -102,7 +102,7 @@ export const GameListScreen: React.FC<Props> = ({ navigation }) => {
       // Categorize games
       const categorized = categoryUtils.categorizeGames(enhancedGames, {
         includeFavorites: true,
-        includeRecent: true,
+        includeRecent: false,
         maxRecentDays: 7,
         minGamesPerCategory: 1,
         showEmptyCategories: false,
@@ -156,7 +156,7 @@ export const GameListScreen: React.FC<Props> = ({ navigation }) => {
       // Categorize fallback games
       const categorized = categoryUtils.categorizeGames(enhancedFallbackGames, {
         includeFavorites: true,
-        includeRecent: true,
+        includeRecent: false,
         maxRecentDays: 7,
         minGamesPerCategory: 1,
         showEmptyCategories: false,
@@ -234,7 +234,7 @@ export const GameListScreen: React.FC<Props> = ({ navigation }) => {
       // Re-categorize games
       const categorized = categoryUtils.categorizeGames(enhancedGames, {
         includeFavorites: true,
-        includeRecent: true,
+        includeRecent: false,
         maxRecentDays: 7,
         minGamesPerCategory: 1,
         showEmptyCategories: false,

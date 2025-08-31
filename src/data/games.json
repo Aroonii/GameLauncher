@@ -2,7 +2,7 @@
   {
     "id": "1",
     "title": "Tetris",
-    "image": "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/nintendo.svg",
+    "image": "https://raw.githubusercontent.com/game-icons/icons/master/delapouite/tetris.svg",
     "url": "https://htmltetris.cz/",
     "preferredOrientation": "portrait",
     "category": "puzzle",
@@ -11,7 +11,7 @@
   {
     "id": "2",
     "title": "HexGL Racing",
-    "image": "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/ferrari.svg",
+    "image": "https://raw.githubusercontent.com/game-icons/icons/master/delapouite/sports-car.svg",
     "url": "https://hexgl.bkcore.com/",
     "preferredOrientation": "landscape",
     "category": "racing",
@@ -20,7 +20,7 @@
   {
     "id": "3",
     "title": "2048",
-    "image": "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/mathworks.svg",
+    "image": "https://raw.githubusercontent.com/game-icons/icons/master/delapouite/rolling-dices.svg",
     "url": "https://play2048.co/",
     "preferredOrientation": "portrait",
     "category": "puzzle",
@@ -29,7 +29,7 @@
   {
     "id": "4",
     "title": "Pac-Man",
-    "image": "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/namecheap.svg",
+    "image": "https://raw.githubusercontent.com/game-icons/icons/master/delapouite/pacman.svg",
     "url": "https://pacman.platzh1rsch.ch/",
     "preferredOrientation": "landscape",
     "category": "arcade",
@@ -38,7 +38,7 @@
   {
     "id": "5",
     "title": "Snake Game",
-    "image": "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/python.svg",
+    "image": "https://raw.githubusercontent.com/game-icons/icons/master/delapouite/snake.svg",
     "url": "https://playsnake.org/",
     "preferredOrientation": "landscape",
     "category": "casual",
@@ -47,7 +47,7 @@
   {
     "id": "6",
     "title": "Chess",
-    "image": "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/lichess.svg",
+    "image": "https://raw.githubusercontent.com/game-icons/icons/master/delapouite/chess-knight.svg",
     "url": "https://lichess.org/",
     "preferredOrientation": "portrait",
     "category": "strategy",
@@ -56,7 +56,7 @@
   {
     "id": "7",
     "title": "Solitaire",
-    "image": "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/microsoftoffice.svg",
+    "image": "https://raw.githubusercontent.com/game-icons/icons/master/delapouite/card-play.svg",
     "url": "https://solitaired.com/",
     "preferredOrientation": "portrait",
     "category": "casual",
@@ -65,7 +65,7 @@
   {
     "id": "8",
     "title": "Hextris",
-    "image": "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/hexo.svg",
+    "image": "https://raw.githubusercontent.com/game-icons/icons/master/delapouite/hexagon.svg",
     "url": "https://hextris.io/",
     "preferredOrientation": "portrait",
     "category": "puzzle",
@@ -74,7 +74,7 @@
   {
     "id": "9",
     "title": "Slither.io",
-    "image": "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/anaconda.svg",
+    "image": "https://raw.githubusercontent.com/game-icons/icons/master/delapouite/snake-spiral.svg",
     "url": "https://slither.io/",
     "preferredOrientation": "landscape",
     "category": "action",
