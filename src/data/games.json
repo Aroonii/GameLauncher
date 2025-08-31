@@ -19,24 +19,6 @@
   },
   {
     "id": "3",
-    "title": "Flappy Bird",
-    "image": "https://via.placeholder.com/200x200/f39c12/ffffff?text=%F0%9F%90%A6%E2%80%8BFlappy",
-    "url": "https://flappybird.io/",
-    "preferredOrientation": "landscape",
-    "category": "arcade",
-    "description": "Tap to fly through pipes in this addictive classic"
-  },
-  {
-    "id": "4",
-    "title": "Tomb Runner",
-    "image": "https://via.placeholder.com/200x200/27ae60/ffffff?text=%F0%9F%8F%83%E2%80%8BRunner",
-    "url": "https://plays.org/tomb-runner/",
-    "preferredOrientation": "landscape",
-    "category": "adventure",
-    "description": "Endless temple running with treasure and danger"
-  },
-  {
-    "id": "5",
     "title": "2048",
     "image": "https://via.placeholder.com/200x200/3498db/ffffff?text=%F0%9F%94%A2%E2%80%8B2048",
     "url": "https://play2048.co/",
@@ -45,7 +27,7 @@
     "description": "Combine numbered tiles to reach the magic 2048"
   },
   {
-    "id": "6",
+    "id": "4",
     "title": "Pac-Man",
     "image": "https://via.placeholder.com/200x200/f1c40f/000000?text=%F0%9F%91%BE%E2%80%8BPac-Man",
     "url": "https://pacman.platzh1rsch.ch/",
@@ -54,7 +36,7 @@
     "description": "Eat dots, avoid ghosts, and collect power-ups"
   },
   {
-    "id": "7",
+    "id": "5",
     "title": "Snake Game",
     "image": "https://via.placeholder.com/200x200/2ecc71/ffffff?text=%F0%9F%90%8D%E2%80%8BSnake",
     "url": "https://playsnake.org/",
@@ -63,7 +45,7 @@
     "description": "Guide your snake to eat food and grow longer"
   },
   {
-    "id": "8",
+    "id": "6",
     "title": "Chess",
     "image": "https://via.placeholder.com/200x200/34495e/ffffff?text=%E2%99%9F%E2%80%8BChess",
     "url": "https://lichess.org/",
@@ -72,16 +54,7 @@
     "description": "Classic strategic board game for tactical minds"
   },
   {
-    "id": "9",
-    "title": "Basketball",
-    "image": "https://via.placeholder.com/200x200/e67e22/ffffff?text=%E2%9A%BD%E2%80%8BBall",
-    "url": "https://www.addictinggames.com/sports-games/basketball-legends",
-    "preferredOrientation": "landscape",
-    "category": "sports",
-    "description": "Shoot hoops and score points in this basketball game"
-  },
-  {
-    "id": "10",
+    "id": "7",
     "title": "Solitaire",
     "image": "https://via.placeholder.com/200x200/9b59b6/ffffff?text=%F0%9F%83%8E%E2%80%8BSolitaire",
     "url": "https://solitaired.com/",
@@ -90,7 +63,7 @@
     "description": "The timeless card game perfect for relaxing"
   },
   {
-    "id": "11",
+    "id": "8",
     "title": "Tower Defense",
     "image": "https://via.placeholder.com/200x200/16a085/ffffff?text=%F0%9F%8F%B0%E2%80%8BTower",
     "url": "https://www.addictinggames.com/strategy-games/bloons-tower-defense",
@@ -99,7 +72,7 @@
     "description": "Build towers and defend against waves of enemies"
   },
   {
-    "id": "12",
+    "id": "9",
     "title": "Broken Game",
     "image": "https://via.placeholder.com/200x200/95a5a6/ffffff?text=%E2%9A%A0%EF%B8%8F%E2%80%8BTest",
     "url": "https://example.com/nonexistent-game",
