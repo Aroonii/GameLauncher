@@ -35,3 +35,10 @@ yarn-error.*
 
 # typescript
 *.tsbuildinfo
+
+# Analysis and reference documentation (personal notes)
+ANALYSIS_INDEX.md
+PROJECT_ANALYSIS.md
+PROJECT_STATE_ANALYSIS.md
+ARCHITECTURE_QUICK_REFERENCE.md
+NEXT_STEPS_ROADMAP.md
