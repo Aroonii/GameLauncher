@@ -2,7 +2,7 @@
   "expo": {
     "name": "GameLauncher",
     "slug": "GameLauncher",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "default",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "dark",
@@ -13,17 +13,32 @@
       "backgroundColor": "#0f0f23"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.gamelauncher.app",
+      "buildNumber": "2",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
+      "package": "com.gamelauncher.app",
+      "versionCode": 2,
+      "permissions": [
+        "INTERNET"
+      ],
       "edgeToEdgeEnabled": true
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "a1179962-4b1d-4166-ae05-71b6095b1dc1"
+      }
     }
   }
 }
