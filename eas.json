@@ -29,7 +29,8 @@
     "preview": {
       "distribution": "internal",
       "env": {
-        "NPM_CONFIG_LEGACY_PEER_DEPS": "true"
+        "NPM_CONFIG_LEGACY_PEER_DEPS": "true",
+        "EAS_BUILD_AUTOCOMMIT": "false"
       },
       "android": {
         "buildType": "apk",
