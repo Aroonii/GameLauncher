@@ -1,0 +1,17 @@
+# Ignore native directories for managed workflow
+android/
+ios/
+
+# Ignore local environment files
+.env.local
+.env.*.local
+
+# Ignore test coverage
+coverage/
+
+# Ignore analysis docs
+ANALYSIS_INDEX.md
+PROJECT_ANALYSIS.md
+PROJECT_STATE_ANALYSIS.md
+ARCHITECTURE_QUICK_REFERENCE.md
+NEXT_STEPS_ROADMAP.md

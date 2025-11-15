@@ -3,6 +3,7 @@
     "name": "GameLauncher",
     "slug": "GameLauncher",
     "version": "1.0.1",
+    "sdkVersion": "54.0.0",
     "orientation": "default",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "dark",
