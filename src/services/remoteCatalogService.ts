@@ -32,6 +32,15 @@ export interface RemoteCatalogResult {
 }
 
 class RemoteCatalogService {
+  private filterEnabledGames(games: Game[]): Game[] {
+    // Filter out games that are explicitly disabled
+    return games.filter(game => {
+      // If the game doesn't have an 'enabled' field, it's enabled by default
+      // If it has 'enabled: false', filter it out
+      return (game as any).enabled !== false;
+    });
+  }
+
   private isValidUrl(url: string): boolean {
     try {
       const parsedUrl = new URL(url);
@@ -173,7 +182,7 @@ class RemoteCatalogService {
       const bundledGames = gamesData as Game[];
       
       return {
-        games: bundledGames,
+        games: this.filterEnabledGames(bundledGames),
         source: 'bundled',
         metadata: {
           fetchTime: Date.now() - startTime,
@@ -213,7 +222,7 @@ class RemoteCatalogService {
         await storageService.cacheGames(remoteGames);
         
         return {
-          games: remoteGames,
+          games: this.filterEnabledGames(remoteGames),
           source: 'remote',
           metadata: {
             fetchTime: Date.now() - startTime,
@@ -229,7 +238,7 @@ class RemoteCatalogService {
         if (cachedGames && cachedGames.length > 0) {
           console.log('Using cached games as fallback');
           return {
-            games: cachedGames,
+            games: this.filterEnabledGames(cachedGames),
             source: 'cached',
             metadata: {
               fetchTime: Date.now() - startTime,

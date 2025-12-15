@@ -15,7 +15,9 @@
     "url": "https://hexgl.bkcore.com/",
     "preferredOrientation": "landscape",
     "category": "racing",
-    "description": "Futuristic high-speed racing through neon-lit tracks"
+    "description": "Futuristic high-speed racing through neon-lit tracks",
+    "enabled": false,
+    "disabledReason": "Not available in some regions, WebGL performance issues"
   },
   {
     "id": "3",
@@ -78,6 +80,8 @@
     "url": "https://slither.io/",
     "preferredOrientation": "landscape",
     "category": "action",
-    "description": "Massive multiplayer snake game with smooth graphics"
+    "description": "Massive multiplayer snake game with smooth graphics",
+    "enabled": false,
+    "disabledReason": "Multiplayer connectivity issues in some regions"
   }
 ]
