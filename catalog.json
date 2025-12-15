@@ -1,17 +1,17 @@
 [
   {
     "id": "1",
-    "title": "Tetris",
-    "image": "https://via.placeholder.com/200x200/8e44ad/ffffff?text=TETRIS",
-    "url": "https://htmltetris.cz/",
+    "title": "Cut the Rope",
+    "image": "https://cdn.jsdelivr.net/gh/Aroonii/GameLauncher-Assets/images/cut-the-rope.svg",
+    "url": "https://www.cuttherope.net/",
     "preferredOrientation": "portrait",
     "category": "puzzle",
-    "description": "Classic block-stacking puzzle game that never gets old"
+    "description": "Physics-based puzzle game with adorable character Om Nom"
   },
   {
     "id": "2",
     "title": "HexGL Racing",
-    "image": "https://hexgl.bkcore.com/css/images/hexgl.jpg",
+    "image": "https://cdn.jsdelivr.net/gh/Aroonii/GameLauncher-Assets/images/hexgl.svg",
     "url": "https://hexgl.bkcore.com/",
     "preferredOrientation": "landscape",
     "category": "racing",
@@ -22,47 +22,47 @@
   {
     "id": "3",
     "title": "2048",
-    "image": "https://play2048.co/img/2048-logo.svg",
+    "image": "https://cdn.jsdelivr.net/gh/Aroonii/GameLauncher-Assets/images/2048.svg",
     "url": "https://play2048.co/",
     "preferredOrientation": "portrait",
     "category": "puzzle",
-    "description": "Combine numbered tiles to reach the magic 2048"
+    "description": "Addictive number sliding puzzle game"
   },
   {
     "id": "4",
     "title": "Pac-Man",
-    "image": "https://pacman.platzh1rsch.ch/images/pacman.png",
-    "url": "https://pacman.platzh1rsch.ch/",
+    "image": "https://cdn.jsdelivr.net/gh/Aroonii/GameLauncher-Assets/images/pacman.svg",
+    "url": "https://www.google.com/search?q=pac-man&oi=ddle",
     "preferredOrientation": "landscape",
     "category": "arcade",
-    "description": "Eat dots, avoid ghosts, and collect power-ups"
+    "description": "Classic arcade game - eat dots and avoid ghosts"
   },
   {
     "id": "5",
-    "title": "Snake Game",
-    "image": "https://playsnake.org/images/snake-game.png",
-    "url": "https://playsnake.org/",
-    "preferredOrientation": "landscape",
+    "title": "Crossy Road",
+    "image": "https://cdn.jsdelivr.net/gh/Aroonii/GameLauncher-Assets/images/crossy-road.svg",
+    "url": "https://crossyroad.com/",
+    "preferredOrientation": "portrait",
     "category": "casual",
-    "description": "Guide your snake to eat food and grow longer"
+    "description": "Endless hopping adventure across roads and rivers"
   },
   {
     "id": "6",
-    "title": "Chess",
-    "image": "https://lichess1.org/assets/_fuiJqG/logo/lichess-favicon-256.png",
-    "url": "https://lichess.org/",
+    "title": "Tetris",
+    "image": "https://cdn.jsdelivr.net/gh/Aroonii/GameLauncher-Assets/images/tetris.svg",
+    "url": "https://tetris.com/play-tetris",
     "preferredOrientation": "portrait",
-    "category": "strategy",
-    "description": "Classic strategic board game for tactical minds"
+    "category": "puzzle",
+    "description": "The classic block-stacking puzzle game"
   },
   {
     "id": "7",
-    "title": "Solitaire",
-    "image": "https://solitaired.com/favicon-96x96.png",
-    "url": "https://solitaired.com/",
+    "title": "Chess.com",
+    "image": "https://cdn.jsdelivr.net/gh/Aroonii/GameLauncher-Assets/images/chess.svg",
+    "url": "https://www.chess.com/play/computer",
     "preferredOrientation": "portrait",
-    "category": "casual",
-    "description": "The timeless card game perfect for relaxing"
+    "category": "strategy",
+    "description": "Play chess against computer or other players"
   },
   {
     "id": "8",
@@ -84,4 +84,4 @@
     "enabled": false,
     "disabledReason": "Multiplayer connectivity issues in some regions"
   }
-]  
+]
