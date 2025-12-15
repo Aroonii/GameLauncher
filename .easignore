@@ -1,17 +1,95 @@
-# Ignore native directories for managed workflow
+# .easignore - Files to exclude from EAS Build uploads
+# This speeds up build uploads significantly
+
+# Dependencies (these are installed on EAS servers)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+
+# Build folders (if they exist locally)
 android/
 ios/
+.expo/
+dist/
+build/
+web-build/
 
-# Ignore local environment files
-.env.local
-.env.*.local
+# Version control
+.git/
+.gitignore
+.gitattributes
+.easignore
 
-# Ignore test coverage
-coverage/
+# Documentation and roadmaps
+*.md
+README*
+ROADMAP*
+SELF_HOSTING*
+GAME_HOSTING*
+LICENSE
+CHANGELOG*
+docs/
+documentation/
 
-# Ignore analysis docs
+# Analysis documentation
 ANALYSIS_INDEX.md
 PROJECT_ANALYSIS.md
 PROJECT_STATE_ANALYSIS.md
 ARCHITECTURE_QUICK_REFERENCE.md
 NEXT_STEPS_ROADMAP.md
+
+# Development files
+.env
+.env.local
+.env.development
+.env.test
+.env.*.local
+.vscode/
+.idea/
+*.sublime-*
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+*~
+
+# Test files
+__tests__/
+**/*.test.ts
+**/*.test.tsx
+**/*.spec.ts
+**/*.spec.tsx
+coverage/
+jest.config.js
+
+# Temporary files
+*.log
+*.tmp
+*.temp
+.cache/
+tmp/
+temp/
+
+# Unused data files
+src/data/self-hosted-games.json
+
+# AI development tasks (documentation)
+ai-dev-tasks/
+
+# TypeScript cache
+*.tsbuildinfo
+.typescript/
+
+# Expo
+.expo-shared/
+
+# Metro
+.metro-health-check*
+
+# Debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
