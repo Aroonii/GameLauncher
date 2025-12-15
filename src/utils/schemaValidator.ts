@@ -24,6 +24,8 @@ const GAME_SCHEMA = {
     },
     category: { type: 'string', maxLength: 50, optional: true },
     description: { type: 'string', maxLength: 1000, optional: true },
+    enabled: { type: 'boolean', optional: true },
+    disabledReason: { type: 'string', maxLength: 500, optional: true },
   },
 };
 
@@ -139,6 +141,16 @@ class SchemaValidator {
         if (!sanitizedGame.description) {
           errors.push('Invalid or unsafe description');
         }
+      }
+
+      // Preserve enabled flag (defaults to true if not specified)
+      if (typeof gameData.enabled === 'boolean') {
+        (sanitizedGame as any).enabled = gameData.enabled;
+      }
+
+      // Preserve disabled reason if game is disabled
+      if (gameData.disabledReason) {
+        (sanitizedGame as any).disabledReason = this.sanitizeString(gameData.disabledReason, 500);
       }
 
       return {
