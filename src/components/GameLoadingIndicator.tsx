@@ -6,12 +6,14 @@ interface Props {
   gameTitle: string;
   progress: number; // 0 to 1
   isVisible: boolean;
+  categoryColor?: string;
 }
 
-export const GameLoadingIndicator: React.FC<Props> = ({ 
-  gameTitle, 
-  progress, 
-  isVisible 
+export const GameLoadingIndicator: React.FC<Props> = ({
+  gameTitle,
+  progress,
+  isVisible,
+  categoryColor = '#667eea'
 }) => {
   const fadeAnim = useRef(new Animated.Value(0)).current;
   const scaleAnim = useRef(new Animated.Value(0.8)).current;
@@ -87,7 +89,7 @@ export const GameLoadingIndicator: React.FC<Props> = ({
       ]}
     >
       <LinearGradient
-        colors={['rgba(102, 126, 234, 0.95)', 'rgba(118, 75, 162, 0.95)']}
+        colors={[`${categoryColor}F2`, `${categoryColor}DD`]}
         style={styles.backdrop}
       />
       <View style={styles.content}>

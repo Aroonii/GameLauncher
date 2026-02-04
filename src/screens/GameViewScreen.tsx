@@ -8,6 +8,7 @@ import { GameLoadingIndicator } from '../components/GameLoadingIndicator';
 import { storageService } from '../services/storageService';
 import { orientationUtils } from '../utils/orientation';
 import { analyticsService } from '../services/analyticsService';
+import { categoryUtils } from '../utils/categoryUtils';
 import { RootStackParamList, Game } from '../types';
 
 type GameViewScreenRouteProp = RouteProp<RootStackParamList, 'GameView'>;
@@ -278,6 +279,7 @@ export const GameViewScreen: React.FC<Props> = ({ route, navigation }) => {
             gameTitle={game.title}
             progress={loadProgress}
             isVisible={isLoading}
+            categoryColor={game.category ? categoryUtils.getCategory(game.category).color : '#667eea'}
           />
         </>
       )}
