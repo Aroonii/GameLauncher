@@ -57,8 +57,10 @@ For each feature/milestone:
 GameLauncher is an instant-play mobile gaming platform built with Expo/React Native that loads HTML5/WASM games via WebView with advanced remote catalog management and privacy-by-design features.
 
 ### Core Data Flow (Phase 2)
-1. **Remote Catalog Loading**: `remoteCatalogService` fetches games from GitHub Pages with ETag caching and schema validation
-2. **Fallback Strategy**: Remote catalog → cached version → bundled `src/data/games.json` 
+1. **Catalog Loading**:
+   - **Dev mode**: Uses bundled `src/data/games.json` directly (no network fetch)
+   - **Production**: `remoteCatalogService` fetches from GitHub Pages with ETag caching
+2. **Fallback Strategy** (production only): Remote catalog → cached version → bundled games
 3. **Privacy-First**: `privacyService` manages user consent levels (essential/analytics/all)
 4. **Favorites System**: `favoritesService` handles game preferences with AsyncStorage persistence
 5. **2-Column Layout**: Games display in side-by-side pairs within each category section
@@ -86,9 +88,13 @@ GameLauncher is an instant-play mobile gaming platform built with Expo/React Nat
 - Media playback configured for game assets
 
 ### Game Catalog Management (Phase 2)
-- **Remote Catalog**: Primary source via GitHub Pages at `https://aroonii.github.io/GameLauncher/catalog.json`
-- **Local Fallback**: `src/data/games.json` serves as bundled backup
-- **Caching**: ETag-based HTTP caching with AsyncStorage persistence
+- **Two Catalog Files** (keep in sync):
+  - `src/data/games.json` - Used in dev mode, bundled with app
+  - `catalog.json` - Deployed to GitHub Pages for production
+- **Dev Mode**: Edit `src/data/games.json` → changes appear immediately with `npm run start`
+- **Production**: Fetches from `https://aroonii.github.io/GameLauncher/catalog.json`
+- **Disabling Games**: Set `"enabled": false` and optionally `"disabledReason": "reason"`
+- **Caching**: ETag-based HTTP caching with AsyncStorage persistence (production only)
 - **Schema Validation**: JSON schema validation for catalog integrity
 - **Categories**: Automatic categorization with Recently Played (max 2), Favorites, and category-based grouping
 - **Layout**: 2-column grid display within each category section using SectionList with game row grouping
@@ -105,12 +111,22 @@ GameLauncher is an instant-play mobile gaming platform built with Expo/React Nat
 - **Performance**: Added heavier games (Hextris, Slither.io) for testing complex WebGL/multiplayer games
 - **Images**: SVG-based game thumbnails via jsdelivr CDN for reliable display
 
-### Remote Catalog Setup
-The app now uses a sophisticated remote catalog system:
-1. **GitHub Pages**: https://aroonii.github.io/GameLauncher/catalog.json
-2. **Auto-deploy**: Updates to `catalog.json` in main branch trigger GitHub Pages redeployment
-3. **Cache Management**: App respects HTTP ETag headers for efficient caching
-4. **Real-time Updates**: Pull-to-refresh or cache expiration fetches latest catalog
+### Catalog Workflow
+**Local Development:**
+1. Edit `src/data/games.json` directly
+2. Run `npm run start` - changes appear immediately
+3. No network requests needed during dev
+
+**Deploying to Production:**
+1. Sync changes: Copy `src/data/games.json` content to `catalog.json`
+2. Commit and push both files
+3. GitHub Pages auto-deploys `catalog.json`
+4. Production app fetches from https://aroonii.github.io/GameLauncher/catalog.json
+
+**Cache Management (Production):**
+- App uses ETag headers for efficient caching
+- Pull-to-refresh fetches latest catalog
+- Fallback to cached/bundled catalog if network fails
 
 ## AI Dev Tasks
 Use these files when I request structured feature development using PRDs:
@@ -138,9 +154,10 @@ Use these files when I request structured feature development using PRDs:
 - Utility tests: `src/utils/__tests__/[utilityName].test.ts`
 
 ### Manual Testing
-- **Development**: Use `npm run start` with tunnel mode for device testing
-- **Performance**: Test with heavier games like Slither.io and HexGL Racing
-- **Network**: Test offline/online scenarios with remote catalog fallbacks
+- **Development**: Use `npm run start` - uses local `src/data/games.json` directly
+- **Device Testing**: Use `npm run start` with tunnel mode for device testing
+- **Performance**: Test with heavier games like Hextris
+- **Production Testing**: Build release version to test remote catalog fetching
 
 ### Test Standards
 - Use descriptive test names that explain what is being tested
