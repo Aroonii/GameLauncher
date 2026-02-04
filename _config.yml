@@ -1,0 +1,16 @@
+# Jekyll configuration for GitHub Pages
+# This site primarily serves catalog.json for the GameLauncher app
+
+# Exclude files/folders from Jekyll processing
+exclude:
+  - docs/plans
+  - ai-dev-tasks
+  - node_modules
+  - src
+  - "*.json"
+  - "*.lock"
+  - "*.log"
+  - .expo
+  - .git
+  - android
+  - ios
