@@ -3,6 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import { RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { WebView } from 'react-native-webview';
+import * as Haptics from 'expo-haptics';
 import { GameErrorScreen } from '../components/GameErrorScreen';
 import { GameLoadingIndicator } from '../components/GameLoadingIndicator';
 import { storageService } from '../services/storageService';
@@ -176,7 +177,10 @@ export const GameViewScreen: React.FC<Props> = ({ route, navigation }) => {
     const loadTime = gameLoadStartTime ? Date.now() - gameLoadStartTime : 0;
     setIsLoading(false);
     setLoadProgress(1);
-    
+
+    // Success haptic
+    Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
     }
