@@ -17,10 +17,11 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18'
-          cache: 'npm'
 
       - name: Install dependencies
-        run: npm install
+        run: |
+          npm install
+          test -f node_modules/.bin/tsc || (echo "tsc not found after install" && exit 1)
 
       - name: TypeScript check
         run: npm run typecheck
