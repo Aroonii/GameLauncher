@@ -186,12 +186,28 @@ class RemoteCatalogService {
 
   async fetchCatalog(config: RemoteCatalogConfig): Promise<RemoteCatalogResult> {
     const startTime = Date.now();
-    
+
+    // In dev mode (but not tests), always use bundled catalog for faster iteration
+    const isTestEnv = process.env.NODE_ENV === 'test' || process.env.JEST_WORKER_ID !== undefined;
+    if (__DEV__ && !isTestEnv) {
+      console.log('Dev mode: Using bundled catalog from src/data/games.json');
+      const bundledGames = gamesData as Game[];
+
+      return {
+        games: this.filterEnabledGames(bundledGames),
+        source: 'bundled',
+        metadata: {
+          fetchTime: Date.now() - startTime,
+          fromCache: false,
+        },
+      };
+    }
+
     // If no URL provided, use bundled catalog
     if (!config.url) {
-      if (__DEV__) console.log('Using bundled catalog (no remote URL)');
+      console.log('Using bundled catalog (no remote URL)');
       const bundledGames = gamesData as Game[];
-      
+
       return {
         games: this.filterEnabledGames(bundledGames),
         source: 'bundled',
