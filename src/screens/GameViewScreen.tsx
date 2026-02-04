@@ -224,17 +224,20 @@ export const GameViewScreen: React.FC<Props> = ({ route, navigation }) => {
     );
   }
 
+  // Get category color for consistent theming
+  const categoryColor = game.category ? categoryUtils.getCategory(game.category).color : '#1a1a2e';
+
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: categoryColor }]}>
       {orientationChanging ? (
-        <View style={styles.loadingContainer} />
+        <View style={[styles.loadingContainer, { backgroundColor: categoryColor }]} />
       ) : (
         <>
           <WebView
             ref={webViewRef}
             key={webViewKey}
             source={{ uri: game.url }}
-            style={styles.webview}
+            style={[styles.webview, { backgroundColor: categoryColor }]}
             
             // Error handling
             onError={handleError}
@@ -302,6 +305,5 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#f5f5f5',
   },
 });
