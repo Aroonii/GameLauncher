@@ -6,7 +6,9 @@
     "url": "https://www.cuttherope.net/",
     "preferredOrientation": "portrait",
     "category": "puzzle",
-    "description": "Physics-based puzzle game with adorable character Om Nom"
+    "description": "Physics-based puzzle game with adorable character Om Nom",
+    "enabled": false,
+    "disabledReason": "Game not suitable for WebView"
   },
   {
     "id": "2",
@@ -35,7 +37,9 @@
     "url": "https://www.google.com/search?q=pac-man&oi=ddle",
     "preferredOrientation": "landscape",
     "category": "arcade",
-    "description": "Classic arcade game - eat dots and avoid ghosts"
+    "description": "Classic arcade game - eat dots and avoid ghosts",
+    "enabled": false,
+    "disabledReason": "Game not suitable for WebView"
   },
   {
     "id": "5",
@@ -44,7 +48,9 @@
     "url": "https://crossyroad.com/",
     "preferredOrientation": "portrait",
     "category": "casual",
-    "description": "Endless hopping adventure across roads and rivers"
+    "description": "Endless hopping adventure across roads and rivers",
+    "enabled": false,
+    "disabledReason": "Game not suitable for WebView"
   },
   {
     "id": "6",

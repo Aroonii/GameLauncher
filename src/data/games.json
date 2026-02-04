@@ -35,7 +35,9 @@
     "url": "https://pacman.platzh1rsch.ch/",
     "preferredOrientation": "landscape",
     "category": "arcade",
-    "description": "Eat dots, avoid ghosts, and collect power-ups"
+    "description": "Eat dots, avoid ghosts, and collect power-ups",
+    "enabled": false,
+    "disabledReason": "Game not suitable for WebView"
   },
   {
     "id": "5",
