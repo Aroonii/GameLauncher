@@ -295,20 +295,10 @@ export const GameListScreen: React.FC<Props> = ({ navigation }) => {
           style={styles.headerGradient}
         >
           <View style={styles.headerContent}>
-            <Text style={styles.headerTitle}>🎮 KORA</Text>
+            <Text style={styles.headerTitle}>KORA</Text>
             <Text style={styles.headerSubtitle}>
-              {games?.length || 0} games • {categorizedGames?.length || 0} categories
+              {games?.length || 0} games available
             </Text>
-            {favoritesService?.getFavoritesCount() > 0 && (
-              <Text style={styles.favoritesInfo}>
-                ⭐ {favoritesService.getFavoritesCount()} favorites
-              </Text>
-            )}
-            {__DEV__ && catalogSource !== 'bundled' && (
-              <Text style={styles.debugInfo}>
-                📡 {catalogSource === 'remote' ? 'Live Catalog' : 'Cached Catalog'}
-              </Text>
-            )}
           </View>
         </LinearGradient>
       </Animated.View>
@@ -400,41 +390,35 @@ const styles = StyleSheet.create({
     backgroundColor: '#0f0f23',
   },
   headerGradient: {
-    paddingTop: 20,
-    paddingBottom: 30,
-    borderBottomLeftRadius: 25,
-    borderBottomRightRadius: 25,
+    paddingTop: 16,
+    paddingBottom: 24,
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 8,
+    elevation: 8,
   },
   headerContent: {
     alignItems: 'center',
   },
   headerTitle: {
-    fontSize: 28,
+    fontSize: 32,
     fontWeight: '800',
     color: '#fff',
     marginBottom: 4,
     textAlign: 'center',
+    letterSpacing: 4,
   },
   headerSubtitle: {
-    fontSize: 16,
-    color: '#fff',
-    opacity: 0.9,
-    textAlign: 'center',
-  },
-  favoritesInfo: {
     fontSize: 14,
-    color: '#fff',
-    opacity: 0.9,
-    textAlign: 'center',
-    marginTop: 2,
-    fontWeight: '600',
-  },
-  debugInfo: {
-    fontSize: 12,
     color: '#fff',
     opacity: 0.8,
     textAlign: 'center',
-    marginTop: 4,
     fontWeight: '500',
   },
   listContainer: {
