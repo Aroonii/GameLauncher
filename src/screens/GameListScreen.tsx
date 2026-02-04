@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { View, SectionList, StyleSheet, Text, ActivityIndicator, RefreshControl, StatusBar, SafeAreaView } from 'react-native';
+import React, { useEffect, useState, useRef } from 'react';
+import { View, SectionList, StyleSheet, Text, ActivityIndicator, RefreshControl, StatusBar, SafeAreaView, Animated } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import NetInfo from '@react-native-community/netinfo';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -33,6 +33,9 @@ export const GameListScreen: React.FC<Props> = ({ navigation }) => {
   const [catalogSource, setCatalogSource] = useState<'remote' | 'cached' | 'bundled'>('bundled');
   const [showConsentDialog, setShowConsentDialog] = useState(false);
   const [showSplash, setShowSplash] = useState(true);
+
+  const headerAnim = useRef(new Animated.Value(-100)).current;
+  const contentOpacity = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
     const initializeApp = async () => {
@@ -286,27 +289,29 @@ export const GameListScreen: React.FC<Props> = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="light-content" />
-      <LinearGradient
-        colors={['#1a1a2e', '#16213e', '#0f3460']}
-        style={styles.headerGradient}
-      >
-        <View style={styles.headerContent}>
-          <Text style={styles.headerTitle}>🎮 KORA</Text>
-          <Text style={styles.headerSubtitle}>
-            {games?.length || 0} games • {categorizedGames?.length || 0} categories
-          </Text>
-          {favoritesService?.getFavoritesCount() > 0 && (
-            <Text style={styles.favoritesInfo}>
-              ⭐ {favoritesService.getFavoritesCount()} favorites
+      <Animated.View style={{ transform: [{ translateY: headerAnim }] }}>
+        <LinearGradient
+          colors={['#1a1a2e', '#16213e', '#0f3460']}
+          style={styles.headerGradient}
+        >
+          <View style={styles.headerContent}>
+            <Text style={styles.headerTitle}>🎮 KORA</Text>
+            <Text style={styles.headerSubtitle}>
+              {games?.length || 0} games • {categorizedGames?.length || 0} categories
             </Text>
-          )}
-          {__DEV__ && catalogSource !== 'bundled' && (
-            <Text style={styles.debugInfo}>
-              📡 {catalogSource === 'remote' ? 'Live Catalog' : 'Cached Catalog'}
-            </Text>
-          )}
-        </View>
-      </LinearGradient>
+            {favoritesService?.getFavoritesCount() > 0 && (
+              <Text style={styles.favoritesInfo}>
+                ⭐ {favoritesService.getFavoritesCount()} favorites
+              </Text>
+            )}
+            {__DEV__ && catalogSource !== 'bundled' && (
+              <Text style={styles.debugInfo}>
+                📡 {catalogSource === 'remote' ? 'Live Catalog' : 'Cached Catalog'}
+              </Text>
+            )}
+          </View>
+        </LinearGradient>
+      </Animated.View>
       
       {isOffline && (
         <View style={styles.offlineIndicator}>
@@ -314,47 +319,49 @@ export const GameListScreen: React.FC<Props> = ({ navigation }) => {
         </View>
       )}
       
-      <SectionList
-        sections={(categorizedGames || []).map(categoryGroup => {
-          console.log('Section data:', categoryGroup.category?.title, 'games:', categoryGroup.games?.length);
-          
-          // Group games in pairs for 2-column layout
-          const games = categoryGroup.games || [];
-          const gameRows = [];
-          for (let i = 0; i < games.length; i += 2) {
-            gameRows.push(games.slice(i, i + 2));
+      <Animated.View style={{ flex: 1, opacity: contentOpacity }}>
+        <SectionList
+          sections={(categorizedGames || []).map(categoryGroup => {
+            console.log('Section data:', categoryGroup.category?.title, 'games:', categoryGroup.games?.length);
+
+            // Group games in pairs for 2-column layout
+            const games = categoryGroup.games || [];
+            const gameRows = [];
+            for (let i = 0; i < games.length; i += 2) {
+              gameRows.push(games.slice(i, i + 2));
+            }
+
+            return {
+              title: categoryGroup.category?.title || 'Unknown Category',
+              data: gameRows,
+              category: categoryGroup.category,
+              gameCount: categoryGroup.gameCount,
+            };
+          })}
+          renderItem={renderGameCard}
+          renderSectionHeader={renderCategoryHeader}
+          keyExtractor={(item, index) => item.map(game => game?.id).join('-') || index.toString()}
+          contentContainerStyle={styles.listContainer}
+          showsVerticalScrollIndicator={false}
+          stickySectionHeadersEnabled={false}
+          refreshControl={
+            <RefreshControl
+              refreshing={refreshing}
+              onRefresh={onRefresh}
+              colors={['#667eea']}
+              tintColor="#667eea"
+              progressBackgroundColor="#fff"
+            />
           }
-          
-          return {
-            title: categoryGroup.category?.title || 'Unknown Category',
-            data: gameRows,
-            category: categoryGroup.category,
-            gameCount: categoryGroup.gameCount,
-          };
-        })}
-        renderItem={renderGameCard}
-        renderSectionHeader={renderCategoryHeader}
-        keyExtractor={(item, index) => item.map(game => game?.id).join('-') || index.toString()}
-        contentContainerStyle={styles.listContainer}
-        showsVerticalScrollIndicator={false}
-        stickySectionHeadersEnabled={false}
-        refreshControl={
-          <RefreshControl
-            refreshing={refreshing}
-            onRefresh={onRefresh}
-            colors={['#667eea']}
-            tintColor="#667eea"
-            progressBackgroundColor="#fff"
-          />
-        }
-        renderSectionFooter={({ section }) => (
-          section.gameCount === 0 ? (
-            <View style={styles.emptyCategoryContainer}>
-              <Text style={styles.emptyCategoryText}>No games in this category yet</Text>
-            </View>
-          ) : null
-        )}
-      />
+          renderSectionFooter={({ section }) => (
+            section.gameCount === 0 ? (
+              <View style={styles.emptyCategoryContainer}>
+                <Text style={styles.emptyCategoryText}>No games in this category yet</Text>
+              </View>
+            ) : null
+          )}
+        />
+      </Animated.View>
 
       {/* Privacy Consent Dialog */}
       <ConsentDialog
@@ -366,7 +373,22 @@ export const GameListScreen: React.FC<Props> = ({ navigation }) => {
       {/* Animated Splash Screen */}
       <SplashScreen
         visible={showSplash}
-        onAnimationComplete={() => setShowSplash(false)}
+        onAnimationComplete={() => {
+          setShowSplash(false);
+          // Animate content in
+          Animated.parallel([
+            Animated.timing(headerAnim, {
+              toValue: 0,
+              duration: 300,
+              useNativeDriver: true,
+            }),
+            Animated.timing(contentOpacity, {
+              toValue: 1,
+              duration: 400,
+              useNativeDriver: true,
+            }),
+          ]).start();
+        }}
       />
     </SafeAreaView>
   );
