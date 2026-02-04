@@ -35,6 +35,7 @@ export const CategoryHeader: React.FC<CategoryHeaderProps> = ({
 
   return (
     <View style={styles.container}>
+      <View style={[styles.accentBar, { backgroundColor: category.color }]} />
       <TouchableOpacity
         style={styles.headerButton}
         onPress={handleToggle}
@@ -104,18 +105,29 @@ export const CategoryHeader: React.FC<CategoryHeaderProps> = ({
 
 const styles = StyleSheet.create({
   container: {
-    marginVertical: 8,
+    marginTop: 24,
+    marginBottom: 8,
     marginHorizontal: 16,
     position: 'relative',
+    flexDirection: 'row',
+  },
+  accentBar: {
+    width: 4,
+    borderRadius: 2,
+    marginRight: 0,
   },
   headerButton: {
+    flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingVertical: 12,
     paddingHorizontal: 16,
     backgroundColor: '#fff',
-    borderRadius: 12,
+    borderTopRightRadius: 12,
+    borderBottomRightRadius: 12,
+    borderTopLeftRadius: 0,
+    borderBottomLeftRadius: 0,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -124,7 +136,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 2,
-    minHeight: 64, // Accessibility minimum touch target
+    minHeight: 64,
   },
   leftSection: {
     flexDirection: 'row',
@@ -149,7 +161,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   categoryTitle: {
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: '700',
     color: '#2c3e50',
     marginBottom: 2,
