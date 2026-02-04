@@ -21,6 +21,7 @@ export const GameCard: React.FC<GameCardProps> = ({
 }) => {
   const [scaleAnim] = useState(new Animated.Value(1));
   const [glowAnim] = useState(new Animated.Value(0));
+  const [starScale] = useState(new Animated.Value(1));
 
   // Defensive checks
   if (!game) {
@@ -92,6 +93,22 @@ export const GameCard: React.FC<GameCardProps> = ({
     // Fire-and-forget: We intentionally don't await impactAsync because we want
     // the haptic feedback to trigger immediately without blocking UI interactions
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+
+    // Bouncy animation for the star
+    Animated.sequence([
+      Animated.timing(starScale, {
+        toValue: 1.4,
+        duration: 100,
+        useNativeDriver: true,
+      }),
+      Animated.spring(starScale, {
+        toValue: 1,
+        friction: 3,
+        tension: 100,
+        useNativeDriver: true,
+      }),
+    ]).start();
+
     if (onFavoriteToggle) {
       onFavoriteToggle(game);
     }
@@ -163,12 +180,15 @@ export const GameCard: React.FC<GameCardProps> = ({
               accessibilityRole="button"
               accessibilityLabel={game.isFavorite ? 'Remove from favorites' : 'Add to favorites'}
             >
-              <Text style={[
-                styles.favoriteIcon,
-                game.isFavorite && styles.favoriteIconActive
-              ]}>
-                <Text>{game.isFavorite ? '★' : '☆'}</Text>
-              </Text>
+              <Animated.Text
+                style={[
+                  styles.favoriteIcon,
+                  game.isFavorite && styles.favoriteIconActive,
+                  { transform: [{ scale: starScale }] }
+                ]}
+              >
+                {game.isFavorite ? '★' : '☆'}
+              </Animated.Text>
             </TouchableOpacity>
           )}
         </View>
