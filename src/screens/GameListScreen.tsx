@@ -3,6 +3,7 @@ import { View, SectionList, StyleSheet, Text, ActivityIndicator, RefreshControl,
 import { StackNavigationProp } from '@react-navigation/stack';
 import NetInfo from '@react-native-community/netinfo';
 import { LinearGradient } from 'expo-linear-gradient';
+import * as Haptics from 'expo-haptics';
 import { GameCard } from '../components/GameCard';
 import { CategoryHeader } from '../components/CategoryHeader';
 import { ConsentDialog } from '../components/ConsentDialog';
@@ -194,6 +195,7 @@ export const GameListScreen: React.FC<Props> = ({ navigation }) => {
   };
 
   const onRefresh = async () => {
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
     setRefreshing(true);
     await loadGames(true);
   };
