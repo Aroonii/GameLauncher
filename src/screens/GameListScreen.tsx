@@ -6,6 +6,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { GameCard } from '../components/GameCard';
 import { CategoryHeader } from '../components/CategoryHeader';
 import { ConsentDialog } from '../components/ConsentDialog';
+import { SplashScreen } from '../components/SplashScreen';
 import { storageService } from '../services/storageService';
 import { remoteCatalogService } from '../services/remoteCatalogService';
 import { configService } from '../services/configService';
@@ -31,6 +32,7 @@ export const GameListScreen: React.FC<Props> = ({ navigation }) => {
   const [isOffline, setIsOffline] = useState(false);
   const [catalogSource, setCatalogSource] = useState<'remote' | 'cached' | 'bundled'>('bundled');
   const [showConsentDialog, setShowConsentDialog] = useState(false);
+  const [showSplash, setShowSplash] = useState(true);
 
   useEffect(() => {
     const initializeApp = async () => {
@@ -268,7 +270,7 @@ export const GameListScreen: React.FC<Props> = ({ navigation }) => {
     />
   );
 
-  if (loading) {
+  if (loading && !showSplash) {
     return (
       <LinearGradient
         colors={['#0f0f23', '#1a1a2e', '#16213e']}
@@ -276,7 +278,7 @@ export const GameListScreen: React.FC<Props> = ({ navigation }) => {
       >
         <StatusBar barStyle="light-content" />
         <ActivityIndicator size="large" color="#fff" />
-        <Text style={styles.loadingText}>Loading amazing games...</Text>
+        <Text style={styles.loadingText}>Loading games...</Text>
       </LinearGradient>
     );
   }
@@ -359,6 +361,12 @@ export const GameListScreen: React.FC<Props> = ({ navigation }) => {
         visible={showConsentDialog}
         onConsentGiven={handleConsentGiven}
         onClose={() => setShowConsentDialog(false)}
+      />
+
+      {/* Animated Splash Screen */}
+      <SplashScreen
+        visible={showSplash}
+        onAnimationComplete={() => setShowSplash(false)}
       />
     </SafeAreaView>
   );
