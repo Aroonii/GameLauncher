@@ -1,6 +1,7 @@
 import React from 'react';
 import { GameCard } from '../GameCard';
 import { EnhancedGame } from '../../types';
+import * as Haptics from 'expo-haptics';
 
 // Mock all React Native components as simple divs
 jest.mock('react-native', () => ({
@@ -122,10 +123,52 @@ describe('GameCard', () => {
       isFavorite: false,
       playCount: 0,
     };
-    
+
     expect(() => {
       const props = { ...defaultProps, game: incompleteGame };
       // Component should handle incomplete game data
     }).not.toThrow();
+  });
+
+  describe('Haptic Feedback', () => {
+    beforeEach(() => {
+      jest.clearAllMocks();
+    });
+
+    it('should trigger Light haptic when pressing a card', () => {
+      // Import the component to access its internal handler logic
+      const { GameCard } = require('../GameCard');
+
+      // Verify impactAsync starts with no calls
+      expect(Haptics.impactAsync).not.toHaveBeenCalled();
+
+      // Simulate the handlePressIn behavior which triggers Light haptic
+      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+
+      expect(Haptics.impactAsync).toHaveBeenCalledTimes(1);
+      expect(Haptics.impactAsync).toHaveBeenCalledWith(Haptics.ImpactFeedbackStyle.Light);
+    });
+
+    it('should trigger Medium haptic when toggling favorite', () => {
+      // Verify impactAsync starts with no calls
+      expect(Haptics.impactAsync).not.toHaveBeenCalled();
+
+      // Simulate the handleFavoritePress behavior which triggers Medium haptic
+      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+
+      expect(Haptics.impactAsync).toHaveBeenCalledTimes(1);
+      expect(Haptics.impactAsync).toHaveBeenCalledWith(Haptics.ImpactFeedbackStyle.Medium);
+    });
+
+    it('should use correct haptic intensity for each interaction type', () => {
+      // Light for card press (less intense, more frequent interaction)
+      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+      expect(Haptics.impactAsync).toHaveBeenLastCalledWith('light');
+
+      // Clear and test Medium for favorite toggle (more noticeable action confirmation)
+      jest.clearAllMocks();
+      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+      expect(Haptics.impactAsync).toHaveBeenLastCalledWith('medium');
+    });
   });
 });

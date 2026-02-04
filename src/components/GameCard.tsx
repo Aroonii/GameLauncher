@@ -56,6 +56,8 @@ export const GameCard: React.FC<GameCardProps> = ({
   };
 
   const handlePressIn = () => {
+    // Fire-and-forget: We intentionally don't await impactAsync because we want
+    // the haptic feedback to trigger immediately without blocking UI animations
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
     Animated.parallel([
       Animated.spring(scaleAnim, {
@@ -87,6 +89,8 @@ export const GameCard: React.FC<GameCardProps> = ({
   };
 
   const handleFavoritePress = () => {
+    // Fire-and-forget: We intentionally don't await impactAsync because we want
+    // the haptic feedback to trigger immediately without blocking UI interactions
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
     if (onFavoriteToggle) {
       onFavoriteToggle(game);
