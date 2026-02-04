@@ -37,6 +37,7 @@ jest.mock('react-native-webview', () => ({
 jest.mock('react-native', () => ({
   StyleSheet: {
     create: jest.fn(styles => styles),
+    flatten: jest.fn(styles => styles),
   },
   View: 'View',
   Text: 'Text',
@@ -51,11 +52,20 @@ jest.mock('react-native', () => ({
   Animated: {
     View: 'Animated.View',
     Value: jest.fn(() => ({
+      setValue: jest.fn(),
       interpolate: jest.fn(() => ({ outputRange: [0, 1] })),
     })),
-    timing: jest.fn(() => ({ start: jest.fn() })),
+    timing: jest.fn(() => ({
+      start: jest.fn((callback) => {
+        if (callback) callback();
+      }),
+    })),
     spring: jest.fn(() => ({ start: jest.fn() })),
-    parallel: jest.fn(() => ({ start: jest.fn() })),
+    parallel: jest.fn(() => ({
+      start: jest.fn((callback) => {
+        if (callback) callback();
+      }),
+    })),
     loop: jest.fn(() => ({ start: jest.fn(), stop: jest.fn() })),
     sequence: jest.fn(() => ({ start: jest.fn() })),
   },
