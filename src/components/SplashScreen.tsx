@@ -25,7 +25,7 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({
       containerOpacity.setValue(1);
 
       // Logo fade in and scale
-      Animated.parallel([
+      const logoAnimation = Animated.parallel([
         Animated.timing(logoOpacity, {
           toValue: 1,
           duration: 400,
@@ -36,29 +36,45 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({
           duration: 400,
           useNativeDriver: true,
         }),
-      ]).start();
+      ]);
+      logoAnimation.start();
+
+      // Store animation references for cleanup
+      let taglineAnimation: Animated.CompositeAnimation | null = null;
+      let fadeOutAnimation: Animated.CompositeAnimation | null = null;
 
       // Tagline fade in after logo (200ms delay)
-      setTimeout(() => {
-        Animated.timing(taglineOpacity, {
+      const taglineTimeout = setTimeout(() => {
+        taglineAnimation = Animated.timing(taglineOpacity, {
           toValue: 1,
           duration: 300,
           useNativeDriver: true,
-        }).start();
+        });
+        taglineAnimation.start();
       }, 200);
 
       // Fade out and complete after minimum display time (800ms)
-      setTimeout(() => {
-        Animated.timing(containerOpacity, {
+      const fadeOutTimeout = setTimeout(() => {
+        fadeOutAnimation = Animated.timing(containerOpacity, {
           toValue: 0,
           duration: 300,
           useNativeDriver: true,
-        }).start(() => {
+        });
+        fadeOutAnimation.start(() => {
           onAnimationComplete();
         });
       }, 800);
+
+      // Cleanup function to prevent memory leaks
+      return () => {
+        clearTimeout(taglineTimeout);
+        clearTimeout(fadeOutTimeout);
+        logoAnimation.stop();
+        taglineAnimation?.stop();
+        fadeOutAnimation?.stop();
+      };
     }
-  }, [visible]);
+  }, [visible, onAnimationComplete]);
 
   if (!visible) return null;
 

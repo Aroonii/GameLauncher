@@ -59,15 +59,17 @@ jest.mock('react-native', () => ({
       start: jest.fn((callback) => {
         if (callback) callback();
       }),
+      stop: jest.fn(),
     })),
-    spring: jest.fn(() => ({ start: jest.fn() })),
+    spring: jest.fn(() => ({ start: jest.fn(), stop: jest.fn() })),
     parallel: jest.fn(() => ({
       start: jest.fn((callback) => {
         if (callback) callback();
       }),
+      stop: jest.fn(),
     })),
     loop: jest.fn(() => ({ start: jest.fn(), stop: jest.fn() })),
-    sequence: jest.fn(() => ({ start: jest.fn() })),
+    sequence: jest.fn(() => ({ start: jest.fn(), stop: jest.fn() })),
   },
 }));
 
