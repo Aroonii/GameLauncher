@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet, Animated } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import * as Haptics from 'expo-haptics';
 import { EnhancedGame } from '../types';
 import { categoryUtils } from '../utils/categoryUtils';
 
@@ -55,6 +56,7 @@ export const GameCard: React.FC<GameCardProps> = ({
   };
 
   const handlePressIn = () => {
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
     Animated.parallel([
       Animated.spring(scaleAnim, {
         toValue: 0.92,
@@ -85,6 +87,7 @@ export const GameCard: React.FC<GameCardProps> = ({
   };
 
   const handleFavoritePress = () => {
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
     if (onFavoriteToggle) {
       onFavoriteToggle(game);
     }

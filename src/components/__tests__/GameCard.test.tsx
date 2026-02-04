@@ -22,6 +22,15 @@ jest.mock('expo-linear-gradient', () => ({
   LinearGradient: 'LinearGradient',
 }));
 
+jest.mock('expo-haptics', () => ({
+  impactAsync: jest.fn(),
+  ImpactFeedbackStyle: {
+    Light: 'light',
+    Medium: 'medium',
+    Heavy: 'heavy',
+  },
+}));
+
 jest.mock('../../utils/categoryUtils', () => ({
   categoryUtils: {
     getCategory: jest.fn(() => ({
