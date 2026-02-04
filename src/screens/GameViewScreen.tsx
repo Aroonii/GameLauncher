@@ -254,8 +254,7 @@ export const GameViewScreen: React.FC<Props> = ({ route, navigation }) => {
             cacheEnabled={true}
             incognito={false} // Allow caching for better performance
             
-            // Hardware acceleration
-            androidHardwareAccelerationDisabled={false}
+            // Hardware acceleration (handled by default)
             
             // Network and security
             originWhitelist={['*']}
@@ -266,14 +265,9 @@ export const GameViewScreen: React.FC<Props> = ({ route, navigation }) => {
             bounces={false} // Disable iOS bounce for better game experience
             scrollEnabled={false} // Prevent scrolling in games
             
-            // Debugging (remove in production)
-            onConsoleMessage={(event) => {
-              console.log('WebView Console:', event.nativeEvent.message);
-            }}
-            
             // Handle resize gracefully
-            onSizeUpdated={() => {
-              console.log('WebView size updated after orientation change');
+            onContentSizeChange={() => {
+              console.log('WebView content size updated');
             }}
             
             // Custom user agent for better game compatibility

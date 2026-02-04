@@ -15,6 +15,7 @@ describe('FavoritesService', () => {
   const mockGame: Game = {
     id: 'test-game-1',
     title: 'Test Game',
+    image: 'https://example.com/image.png',
     url: 'https://example.com/game',
     category: 'puzzle',
     description: 'A test game',

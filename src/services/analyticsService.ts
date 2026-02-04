@@ -139,7 +139,11 @@ class AnalyticsService {
    */
   logGameOpened(game: Game, orientationChanged: boolean = true): void {
     const event: GameOpenedEvent = {
-      ...this.createBaseEvent('game_opened'),
+      event: 'game_opened',
+      timestamp: Date.now(),
+      session_id: this.sessionId,
+      user_agent: navigator?.userAgent,
+      app_version: this.appVersion,
       game_id: game.id,
       game_title: game.title,
       game_url: game.url,
@@ -159,7 +163,11 @@ class AnalyticsService {
     retryCount?: number
   ): void {
     const event: GameErrorEvent = {
-      ...this.createBaseEvent('game_error'),
+      event: 'game_error',
+      timestamp: Date.now(),
+      session_id: this.sessionId,
+      user_agent: navigator?.userAgent,
+      app_version: this.appVersion,
       game_id: game.id,
       game_title: game.title,
       game_url: game.url,

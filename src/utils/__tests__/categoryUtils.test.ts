@@ -6,6 +6,7 @@ describe('CategoryUtils', () => {
     {
       id: 'game1',
       title: 'Tetris',
+      image: 'https://example.com/tetris.png',
       url: 'https://example.com/tetris',
       category: 'puzzle',
       description: 'Classic puzzle game',
@@ -16,6 +17,7 @@ describe('CategoryUtils', () => {
     {
       id: 'game2',
       title: 'Racing Game',
+      image: 'https://example.com/racing.png',
       url: 'https://example.com/racing',
       category: 'racing',
       description: 'Fast racing game',
@@ -25,6 +27,7 @@ describe('CategoryUtils', () => {
     {
       id: 'game3',
       title: 'Chess',
+      image: 'https://example.com/chess.png',
       url: 'https://example.com/chess',
       category: 'strategy',
       description: 'Strategic board game',
@@ -35,6 +38,7 @@ describe('CategoryUtils', () => {
     {
       id: 'game4',
       title: 'Unknown Game',
+      image: 'https://example.com/unknown.png',
       url: 'https://example.com/unknown',
       category: undefined,
       description: 'Game with no category',

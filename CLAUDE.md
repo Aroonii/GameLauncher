@@ -16,12 +16,41 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `npm run test:coverage` - Run tests with coverage report
 - `npm run test:ci` - Run tests for CI environments
 
+### Validation
+- `npm run typecheck` - TypeScript validation
+- `npm run validate` - Typecheck + all tests (use before commits)
+
 ### Git Workflow
 - **IMPORTANT**: Always ask before committing changes to ensure proper testing
 - Test all changes thoroughly before adding to git
 - Never commit untested code or experimental changes
 - Always confirm with user before running `git add` and `git commit` commands
-- **MANDATORY**: Run `npm test` before any commit to ensure all tests pass
+- **MANDATORY**: Run `npm run validate` before any commit (pre-commit hook enforces this)
+
+## Required Reading
+
+Before starting work, review:
+1. **`docs/SPEC.md`** - Technical specification and requirements
+2. **`docs/PLAN.md`** - Current milestone status and next tasks
+3. **`docs/DEVELOPMENT-GUIDE.md`** - Development workflow and setup
+
+## Development Workflow (Ralph Wiggum Loop)
+
+For each feature/milestone:
+1. Implement smallest end-to-end slice
+2. Run `npm run validate` (typecheck + tests)
+3. Fix failures
+4. Repeat steps 2-3 until ALL tests pass
+5. Only then move to next feature
+
+**Stop condition**: ALL tests green + feature works on device.
+
+### Definition of Done (Per Milestone)
+- [ ] Feature works end-to-end (UI + services + data)
+- [ ] Errors handled (validation + empty states)
+- [ ] Tests added for critical logic (min 80% coverage for new code)
+- [ ] `npm run validate` passing
+- [ ] `docs/PLAN.md` updated if milestone completed
 
 ## Architecture
 

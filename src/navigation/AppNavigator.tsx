@@ -16,11 +16,10 @@ export const AppNavigator: React.FC = () => {
           component={GameListScreen}
           options={{ headerShown: false }}
         />
-        <Stack.Screen 
-          name="GameView" 
+        <Stack.Screen
+          name="GameView"
           component={GameViewScreen}
           options={{
-            headerBackTitleVisible: false,
             headerTintColor: '#007AFF',
           }}
         />

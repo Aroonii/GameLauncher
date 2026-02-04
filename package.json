@@ -11,6 +11,8 @@
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "test:ci": "jest --ci --coverage --watchAll=false",
+    "typecheck": "./node_modules/.bin/tsc --noEmit",
+    "validate": "npm run typecheck && npm test",
     "eas-build-pre-install": "npm list expo || npm install expo@~54.0.0",
     "eas-build-post-install": "npx expo --version || npm install expo@~54.0.0"
   },

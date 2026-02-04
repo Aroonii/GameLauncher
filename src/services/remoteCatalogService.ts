@@ -109,26 +109,34 @@ class RemoteCatalogService {
 
   private async fetchRemoteCatalogWithRetry(url: string, etag?: string): Promise<Game[]> {
     let lastError: Error | null = null;
-    
+    let currentEtag = etag;
+
     for (let attempt = 1; attempt <= MAX_RETRY_ATTEMPTS; attempt++) {
       try {
-        console.log(`Fetching remote catalog (attempt ${attempt}/${MAX_RETRY_ATTEMPTS})`);
-        
-        const headers: Record<string, string> = {};
-        if (etag) {
-          headers['If-None-Match'] = etag;
+        if (__DEV__) {
+          console.log(`Fetching remote catalog (attempt ${attempt}/${MAX_RETRY_ATTEMPTS})`);
         }
-        
+
+        const headers: Record<string, string> = {};
+        if (currentEtag) {
+          headers['If-None-Match'] = currentEtag;
+        }
+
         const response = await this.fetchWithTimeout(url, { headers });
-        
+
         // Handle 304 Not Modified
         if (response.status === 304) {
-          console.log('Remote catalog not modified, using cached version');
           const cachedGames = await storageService.getCachedGames();
           if (cachedGames) {
+            if (__DEV__) {
+              console.log('Remote catalog not modified, using cached version');
+            }
             return cachedGames;
           }
-          throw new Error('304 response but no cached games available');
+          // No cache available - clear etag and fetch fresh on next attempt
+          currentEtag = undefined;
+          await storageService.removeItem(REMOTE_CATALOG_ETAG_KEY);
+          throw new Error('Cache miss - will fetch fresh');
         }
         
         if (!response.ok) {
@@ -155,21 +163,24 @@ class RemoteCatalogService {
         }
         
         await storageService.setItem(REMOTE_CATALOG_LAST_FETCH_KEY, Date.now().toString());
-        
-        console.log(`Successfully fetched and validated ${validatedGames.length} games from remote catalog`);
+
+        if (__DEV__) {
+          console.log(`Successfully fetched ${validatedGames.length} games from remote catalog`);
+        }
         return validatedGames;
         
       } catch (error) {
         lastError = error as Error;
-        console.error(`Attempt ${attempt} failed:`, error);
-        
+        if (__DEV__) {
+          console.log(`Catalog fetch attempt ${attempt} failed, retrying...`);
+        }
+
         if (attempt < MAX_RETRY_ATTEMPTS) {
-          console.log(`Retrying in ${RETRY_DELAY_MS}ms...`);
           await this.delay(RETRY_DELAY_MS);
         }
       }
     }
-    
+
     throw lastError || new Error('All retry attempts failed');
   }
 
@@ -178,7 +189,7 @@ class RemoteCatalogService {
     
     // If no URL provided, use bundled catalog
     if (!config.url) {
-      console.log('No remote URL configured, using bundled catalog');
+      if (__DEV__) console.log('Using bundled catalog (no remote URL)');
       const bundledGames = gamesData as Game[];
       
       return {
@@ -194,7 +205,7 @@ class RemoteCatalogService {
     // Validate URL
     if (!this.isValidUrl(config.url)) {
       if (config.fallbackToBundled) {
-        console.log('Invalid URL, falling back to bundled catalog');
+        if (__DEV__) console.log('Invalid URL, using bundled catalog');
         const bundledGames = gamesData as Game[];
         
         return {
@@ -216,7 +227,7 @@ class RemoteCatalogService {
       
       try {
         // Attempt to fetch from remote
-        const remoteGames = await this.fetchRemoteCatalogWithRetry(config.url, storedEtag);
+        const remoteGames = await this.fetchRemoteCatalogWithRetry(config.url, storedEtag ?? undefined);
         
         // Cache the fetched games
         await storageService.cacheGames(remoteGames);
@@ -232,11 +243,9 @@ class RemoteCatalogService {
         };
         
       } catch (remoteError) {
-        console.error('Failed to fetch remote catalog:', remoteError);
-        
         // Fall back to cached games if available
         if (cachedGames && cachedGames.length > 0) {
-          console.log('Using cached games as fallback');
+          if (__DEV__) console.log('Using cached games as fallback');
           return {
             games: this.filterEnabledGames(cachedGames),
             source: 'cached',
@@ -249,7 +258,7 @@ class RemoteCatalogService {
         
         // Fall back to bundled games if configured
         if (config.fallbackToBundled) {
-          console.log('Using bundled games as final fallback');
+          if (__DEV__) console.log('Using bundled games as fallback');
           const bundledGames = gamesData as Game[];
           
           return {
@@ -267,10 +276,8 @@ class RemoteCatalogService {
       }
       
     } catch (error) {
-      console.error('Remote catalog service error:', error);
-      
       if (config.fallbackToBundled) {
-        console.log('Using bundled games due to error');
+        if (__DEV__) console.log('Using bundled games due to error');
         const bundledGames = gamesData as Game[];
         
         return {
@@ -294,9 +301,9 @@ class RemoteCatalogService {
         storageService.removeItem(REMOTE_CATALOG_LAST_FETCH_KEY),
         storageService.clearCache(),
       ]);
-      console.log('Remote catalog cache cleared');
+      if (__DEV__) console.log('Remote catalog cache cleared');
     } catch (error) {
-      console.error('Error clearing remote catalog cache:', error);
+      if (__DEV__) console.error('Error clearing cache:', error);
     }
   }
 }

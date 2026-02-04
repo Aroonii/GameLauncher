@@ -36,6 +36,7 @@ describe('GameCard', () => {
   const mockGame: EnhancedGame = {
     id: 'test-game',
     title: 'Test Game',
+    image: 'https://example.com/image.png',
     url: 'https://example.com/game',
     category: 'puzzle',
     description: 'A test game for unit testing',
@@ -105,6 +106,7 @@ describe('GameCard', () => {
     const incompleteGame: EnhancedGame = {
       id: 'incomplete',
       title: '',
+      image: '',
       url: 'https://example.com',
       category: '',
       description: '',
